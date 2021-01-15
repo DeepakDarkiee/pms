@@ -17,7 +17,7 @@
             <div class="row jumbotron">
 
           <div class="col-sm-4 form-group" style="margin-top: -20px;">
-            <label for="name">First Name :</label>
+            <label for="name">First Name :</label><span class="required">*</span>
             <input type="text" class="form-control" name="first_name" id="name-f" placeholder="First Name." required>
           </div>
           <div class="col-sm-4 form-group" style="margin-top: -20px;">
@@ -25,24 +25,24 @@
             <input type="text" class="form-control" name="middle_name" id="name-f" placeholder="Middle Name." >
           </div>
           <div class="col-sm-4 form-group" style="margin-top: -20px;">
-            <label for="name">Last Name :</label>
+            <label for="name">Last Name :</label><span class="required">*</span>
             <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Last Name." required>
           </div>
           
           <div class="col-sm-12 form-group">
-            <label for="email">Email :</label>
+            <label for="email">Email :</label><span class="required">*</span>
             <input type="text" class="form-control" name="email" id="name-l" placeholder="Email" required>
           </div>
           <div class="col-sm-6 form-group">
-            <label for="Date">Date of Birth :</label>
+            <label for="Date">Date of Birth :</label><span class="required">*</span>
             <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" required>
           </div>
           <div class="col-sm-6 form-group">
-            <label for="e_group">Contact No.</label>
+            <label for="e_group">Contact No.</label><span class="required">*</span>
             <input type="text" class="form-control" name="contact" id="name-f" placeholder="Contact Number" required>
           </div>
           <div class="col-sm-12 form-group">
-            <label for="cost_center">Address Line 1</label>
+            <label for="cost_center">Address Line 1</label><span class="required">*</span>
             <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" required>
           </div>
           <div class="col-sm-12 form-group">
@@ -54,29 +54,29 @@
         <input type="text" class="form-control" name="lendmark" id="name-l" placeholder="Lendmark">
       </div>
           <div class="col-sm-6 form-group">
-        <label for="bname">City</label>
+        <label for="bname">City</label><span class="required">*</span>
         <input type="text" class="form-control" name="city" id="name-l" placeholder="City" required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="bname">State</label>
+        <label for="bname">State</label><span class="required">*</span>
         <input type="text" class="form-control" name="state" id="name-l" placeholder="State" required>
       </div>
           
       <div class="col-sm-6 form-group">
-        <label for="bname">Policy Number</label>
+        <label for="bname">Policy Number</label><span class="required">*</span>
         <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Policy Number" required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="Dname">Premium</label>
+        <label for="Dname">Premium</label><span class="required">*</span>
         <input type="text" class="form-control" name="premium" id="name-l" placeholder="Premium" required>
       </div>
 
       <div class="col-sm-6 form-group">
-        <label for="created_on">Start Date</label>
+        <label for="created_on">Start Date</label><span class="required">*</span>
         <input type="Date" class="form-control" name="created_on" id="PMDate" placeholder="Start Date" required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="type_of_policy">Pay Frequency</label>
+        <label for="type_of_policy">Pay Frequency</label><span class="required">*</span>
         <select id="period"  name="pay_for" class="form-control browser-default custom-select" required/>
         <!-- <option disabled>type of policy</option> -->
         <option disabled="true" selected="selected">-----Select ----</option>
@@ -93,18 +93,18 @@
     </div>
     
       <div class="col-sm-6 form-group">
-        <label for="Payslip">Sum Assured</label>
+        <label for="Payslip">Sum Assured</label><span class="required">*</span>
         <input type="text" class="form-control" name="sum_assured" id="address-1" placeholder="Sum Assured" required>
       </div>
       
       
       <div class="col-sm-6 form-group">
-        <label for="cc description">Year of Policy</label>
+        <label for="cc description">Year of Policy</label><span class="required">*</span>
         <input type="text" class="form-control" name="year_of_policy" id="description" placeholder="Year of Policy" required>
       </div>
       <div class="col-sm-6 form-group">
         <label for="pan_no"> Beneficiary Name</label>
-        <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Beneficiary Name" required>
+        <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Beneficiary Name" >
       </div>
       <div class="col-sm-6 form-group">
         <label for="type_of_policy">Policy Type</label>&nbsp;&nbsp;<a href="/add-policy"><i class="fa fa-plus-circle" aria-hidden="true" style="font-size:18px"></i></a>

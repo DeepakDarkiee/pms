@@ -1,0 +1,31 @@
+Django Secure
+
+# sudo apt-get update
+
+# sudo apt-get install software-properties-common
+
+# sudo add-apt-repository universe
+
+# sudo add-apt-repository ppa:certbot/certbot
+
+# sudo apt-get update
+
+# sudo apt-get install python-certbot-apache
+
+edit conf file--------------------------------------------
+
+
+# cd /etc/apache2/sites-available/
+
+
+# sudo certbot --apache
+
+# sudo apachectl configtest
+
+# sudo ufw allow https
+
+# sudo service apache2 restart
+
+# sudo certbot renew --dry-run
+
+# sudo crontab -e

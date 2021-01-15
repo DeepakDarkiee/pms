@@ -1,0 +1,4 @@
+id,name,email,dob,contact,address,policy_type,policy_number,premium,sum_assured,year_of_policy,beneficiary_name,created_on,renew_date,status,user
+7,demo,mdipakpatidar@gmail.com,2020-12-11,8827277050,indore (mp),0,223344,2000,200000,20,GOPAL,2020-12-31,2020-12-13,1,1
+8,demo1,neeleshmandloi25@gmail.com,2020-12-12,8827277047,BHOPAL,2,120441,1000,150000,16,vishal,2020-12-12,2020-12-12,1,1
+9,demo2,ishwarmandloi25@gmail.com,2020-12-12,8827277045,BHOPAL,0,12345,2000,150000,10,GOPAL,2020-12-12,2020-12-27,1,1

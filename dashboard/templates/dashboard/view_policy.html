@@ -1,0 +1,138 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<style>
+.form-control {
+color: black;   
+}  
+</style>
+
+{% block header %}
+{% endblock header %}
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">          
+        <h3 class="mb-0">View Policy-Records</h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="/update_policy/{{lics.id}}" method="POST">
+            {% csrf_token %}
+            
+            <div class="row jumbotron">
+
+               <div class="col-sm-12 form-group" style="margin-top: -20px;">
+            <label for="name">First Name :</label>
+            <input type="text" class="form-control" value="{{lics.first_name}}" name="first_name" id="name-f" placeholder="Enter your First Name." readonly>
+          </div>
+          <div class="col-sm-12 form-group" style="margin-top: -20px;">
+            <label for="name">Last Name :</label>
+            <input type="text" class="form-control" name="last_name" value="{{lics.last_name}}" id="name-f" placeholder="Enter your Last Name." readonly>
+          </div>
+          
+              
+              <div class="col-sm-12 form-group">
+                <label for="email">Email :</label>
+                <input type="text" class="form-control" name="email" id="name-l" placeholder="Enter your Email" value="{{ lics.email }}" readonly>
+              </div>
+              <div class="col-sm-6 form-group">
+                <label for="Date">Date of Birth :</label>
+                <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{lics.dob}}" readonly> 
+              </div>
+              <div class="col-sm-6 form-group">
+                <label for="e_group">Contact No.</label>
+                <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" value="{{ lics.contact }}" readonly>
+              </div>
+                <div class="col-sm-12 form-group">
+            <label for="cost_center">Address Line 1</label>
+            <input type="text" class="form-control" name="address_line_one" value="{{lics.address_line_one}}" id="cost_center" placeholder="Enter your address " readonly>
+          </div>
+          <div class="col-sm-12 form-group">
+            <label for="cost_center">Address Line 2</label>
+            <input type="text" class="form-control" name="address_line_two" value="{{lics.address_line_two}}"  id="cost_center" placeholder="Enter your address" readonly>
+          </div>
+          <div class="col-sm-6 form-group">
+        <label for="bname">Lendmark</label>
+        <input type="text" class="form-control" name="lendmark" value="{{lics.lendmark}}" id="name-l" placeholder="Enter  Lendmark" readonly>
+      </div>
+          <div class="col-sm-6 form-group">
+        <label for="bname">City</label>
+        <input type="text" class="form-control" name="city" value="{{lics.city}}" id="name-l" placeholder="Enter City" readonly>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="bname">State</label>
+        <input type="text" class="form-control" name="state" value="{{lics.state}}" id="name-l" placeholder="Enter  State" readonly>
+      </div>
+          <div class="col-sm-6 form-group">
+            <label for="bname">Policy Number</label>
+            <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" value="{{ lics.policy_number }}" readonly>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="Dname">Premium</label>
+            <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium" value="{{ lics.premium }}" readonly>
+          </div>
+           <div class="col-sm-6 form-group">
+        <label for="type_of_policy">Pay For</label>
+         <input type="type" name="type" class="form-control" id="inputType" placeholder="" value="{{lics.get_pay_for_display}}" readonly>
+    </div>
+
+          <div class="col-sm-6 form-group">
+            <label for="Payslip">Sum Assured</label>
+            <input type="text" class="form-control" name="sum_assured" id="address-1" placeholder="enter sum assured" value="{{ lics.sum_assured }}" readonly>
+          </div>
+          
+          
+          <div class="col-sm-6 form-group">
+            <label for="cc description">Year of Policy</label>
+            <input type="text" class="form-control" name="year_of_policy" id="description" placeholder="Enter year of policy" value="{{ lics.year_of_policy }}" readonly>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="pan_no"> Beneficiary Name</label>
+            <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Enter beneficiary name" value="{{ lics.beneficiary_name }}" readonly>
+          </div>
+          <!-- <div class="col-sm-6 form-group">
+            <label for="created_on">Created On</label>
+            <input type="text" class="form-control" name="created_on" id="pan-no" placeholder="{{lics.created_on|date:'Y-m-d'}}" readonly> 
+          </div> -->
+          <div class="col-sm-6 form-group">
+            <label for="renew_date">Created On</label>
+            <input type="text" name="created_on" class="form-control" id="pan-no" placeholder="Enter created date" value="{{lics.created_on}}" readonly>  
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label for="renew_date">Renew Date</label>
+            <input type="Date" name="renew_date" class="form-control" id="Date" placeholder="Enter renew date" value="{{lics.renew_date}}" readonly>  
+          </div>
+          
+          <div class="col-sm-6 form-group">
+            <label for="renew_date">Policy Type</label>
+            <input type="type" name="type" class="form-control" id="inputType" placeholder="" value="{{lics.policy_type}}" readonly>  
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label for="renew_date">status</label>
+            <input type="type" name="status" class="form-control" id="inputStatus" placeholder="" value="{{lics.get_status_display}}" readonly>  
+          </div>
+
+          
+          <div class="col-sm-12 form-group mb-0">
+           <a class="btn btn-sm btn-primary"  style="color:white; margin-left:90%"  href="{% url 'show_record' %}"><span class="glyphicon glyphicon-pencil" >Back</span></a>
+         </div>         
+       </div>
+     </form>
+   </div> 
+</div>
+</div>
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+</div>
+
+{% endblock content %}
+

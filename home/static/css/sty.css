@@ -1,0 +1,32 @@
+
+.section_gap {
+    padding: 45px 0;
+} 
+
+.home_banner_area {
+  z-index: 1;
+  min-height: 900px;
+  position: relative;
+  background: url(static/img/banner/analytics-3265840_1920.jpg) no-repeat center;
+  background-size: cover; }
+  .home_banner_area .banner_inner {
+    position: absolute;
+    top: 40%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 100%; }
+    @media (max-width: 991px) {
+      .home_banner_area .banner_inner {
+        top: 50%; } }
+    .home_banner_area .banner_inner .banner_content h2 {
+      font-size: 48px;
+      font-weight: 500; }
+    .home_banner_area .banner_inner .banner_content p {
+      font-size: 20px;
+      color: #002347;
+      font-weight: 500; }
+

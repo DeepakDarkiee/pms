@@ -1,0 +1,93 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block content %}
+
+<style type="text/css">
+  .table .thead-light th {
+    background-color: #f6f9fc;
+    color: black;
+  }  
+</style>
+
+
+<div class="container-fluid mt--7">
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Show-Policy</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <!-- <th scope="col">Client_Id</th> -->
+                <th scope="col">Client_Name</th>
+                <th scope="col">Policy_Type</th>
+                <th scope="col">Policy_Number</th>
+                <th scope="col">Year_OF_Policy</th>
+                <th scope="col">Premium</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>                
+              </tr>
+            </thead>
+            <tbody>
+              {% for lic in object_list %}  
+              <tr>
+                
+                <td>{{ lic.first_name }}</td>
+                <td>
+                  {{ lic.get_policy_type_display }}
+                </td>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i> {{ lic.policy_number }}
+                  </span>
+                </td>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i> {{ lic.year_of_policy }}
+                  </span>
+                </td> 
+                
+                <td>
+                  <div class="d-flex align-items-center">
+                    <span class="mr-2">{{ lic.premium }}</span>
+                    
+                  </div>
+                </td>
+                
+                <td>
+                  <div class="d-flex align-items-center">
+                    <span class="mr-2">{{ lic.get_status_display }}</span>
+                    
+                  </div>
+                </td>  
+                <td>
+                  <div class="d-flex align-items-center">
+                    <a style="color:blue" href="/edit_policy/{{ lic.id }}"><span class="glyphicon glyphicon-pencil" >Edit--</span></a>  
+                    <a style="color: red" href="/delete_policy/{{ lic.id }}">Delete</a>  
+
+                  </div>
+                </td> 
+              </div>
+            </td>
+          </tr>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div> 
+</div>
+</div>
+</div> 
+
+{% include "dashboard/footer.html" %}
+
+</div>
+
+{% endblock content %}

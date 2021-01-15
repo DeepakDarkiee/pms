@@ -1,0 +1,252 @@
+  {% extends 'dashboard/base3.html' %}
+  {% block content %}
+
+  <style type="text/css">
+  	.table .thead-light th {
+  		background-color: #f6f9fc;
+  		color: black;  
+  	}  
+  	.success{
+  		list-style: none;
+  		background-color: #2e6da4;
+  		color: white;
+  		box-shadow: 12px 12px 12px #e61c66;
+  		text-align: center;
+  	}
+  </style>
+
+  <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+  	<div class="container-fluid">
+
+  		<div class="dropdown">
+  			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  				My-Drive
+  			</button>
+  			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  				<!-- <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal" href="#"><i class="fa fa-image" style="color: #5e72e4"></i>Image</a> -->
+  				
+  				<a class="dropdown-item" data-toggle="modal" data-target="#fileModal" href="#"><i class="fa fa-file" style="color:#ffd600"></i>File</a>
+  				
+  				<a class="dropdown-item" href="#"><i class="fa fa-folder" style="color: #fb6340 "></i>Folder coming soon..</a>
+  				
+  			</div>
+  		</div>		
+
+  		<form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" method="get" action="{% url 'search-file' %}">
+  			<div class="form-group mb-0">
+  				<div class="input-group input-group-alternative">
+  					<div class="input-group-prepend">
+  						<span class="input-group-text"><i class="fas fa-search"></i></span>
+  					</div>
+  					<input class="form-control" name="qr" placeholder="Search File" type="text" >
+  				</div>
+  			</div>
+  		</form>
+
+  		<ul class="navbar-nav align-items-center d-none d-md-flex">
+  			<li class="nav-item dropdown">
+  				<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  					<div class="media align-items-center">
+  						<span class="avatar avatar-sm rounded-circle">
+
+  							{% if data.profile_pic %}
+  							<img src="/media/{{ data.profile_pic}}" style="height:40px;width:40px;border-radius:50%">
+  							{% else %}
+  							<img src="/static/ishwar.jpg" style="height:40px;width:40px;border-radius:50%">
+  							{% endif %}
+  						</span>
+  						<div class="media-body ml-2 d-none d-lg-block">
+  							<span class="mb-0 text-sm  font-weight-bold">
+  								{{ request.user.username }}
+  							</span>
+  						</div>
+  					</div>
+  				</a>
+  				<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+  					<div class=" dropdown-header noti-title">
+  						<h6 class="text-overflow m-0">Welcome!</h6>
+  					</div>
+  					<a href="{% url 'edit_profile' %}" class="dropdown-item">
+  						<i class="ni ni-single-02"></i>
+  						<span>My profile</span>
+  					</a>
+  					<a href="{% url 'edit_profile' %}" class="dropdown-item">
+  						<i class="ni ni-settings-gear-65"></i>
+  						<span>Settings</span>
+  					</a>
+  					<a href="{% url 'change_password' %}"  class="dropdown-item">
+  						<i class="ni ni-support-16"></i>
+  						<span>Change_Password</span>
+  					</a>
+  					<div class="dropdown-divider"></div>
+  					
+  					<a href="#" class="dropdown-item" data-toggle="modal" data-target="#logoutModal" >
+  						<i class="ni ni-user-run"></i>
+  						<span>Logout</span>
+  					</a>
+
+  				</div>
+  			</li>
+  		</ul>
+  	</div>
+  </nav>
+
+  <!-- image upload  Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: blue" id="exampleModalLabel">Uploade Image</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" class="post-form" enctype="multipart/form-data">  
+            {% csrf_token %}  
+
+            {{ form.as_p }}     
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" style="background-color: #5e72e4" class="btn btn-secondary" data-dismiss="modal"><span style="color: white">Close</span></button>
+            <button type="submit" style="background-color: #8965e0;" class="save btn btn-default">Save</button> 
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- file upload  Modal -->
+  <div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: blue" id="exampleModalLabel">Uploade File</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" class="post-form" enctype="multipart/form-data">  
+            {% csrf_token %} 
+
+            {{ form.as_p }}  
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" style="background-color: #5e72e4" class="btn btn-secondary" data-dismiss="modal"><span style="color: white">Close</span></button>
+            <button type="submit" style="background-color: #8965e0;" class="save btn btn-default">Save</button> 
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt--7">
+  	<!-- Table -->
+  	<div class="row">
+  		<div class="col">
+  			<div class="card shadow">
+  				<div class="card-header border-0">
+  					<div class="row align-items-center">
+  						<div class="col">
+  							
+  							<a  style="background-color: #5e72e4" data-toggle="modal" data-target="#impModal" class="btn btn-sm btn-primary" href="#" class="dropdown-item">
+  								<span>Show-Images-File</span>
+  							</a>							
+  						</div>						
+  					</div>
+  				</div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  
+                  <th scope="col">FILES_NAME</th>
+                  <th scope="col">Date/Time</th>
+                  <th  style="color: white" scope="col">...................</th>
+                  <th scope="col">ACTIONS_RECORDS</th>                 
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in objects_list %}  
+                <tr>
+
+                  <td>{{ obj.file }}</td>
+                  
+                  <td>{{ obj.added_on }}</td>
+
+                  <td>
+                    <div style="margin-left:115%" class="d-flex align-items-center">
+                      <!-- <a class="btn btn-sm btn-primary"  style="color:white"  href="/view_policy/{{ lic.id }}"><span class="glyphicon glyphicon-pencil" >View</span></a> -->
+
+
+                      <a  style="background-color: #825ee4"  class="btn btn-sm btn-primary" href="{{obj.file.url}}" download="{{obj.file.url}}" class="dropdown-item">
+                        <span>Download</span>
+                      </a>
+
+                      <a  style="background-color: #b80000" data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-primary" href="#" class="dropdown-item">
+                        <span>Delete</span>
+                      </a>
+
+                    <!-- delete record Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel"><b>Ready to Leave?</b></h3>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span style="color:red" aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div style="color: black" class="modal-body">Are you sure you want to <span style="color: red" >Delete policy?</span></div>
+                          <div class="modal-footer">
+                            <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Cancel</button>
+                            <a style="background-color: #825ee4" class="btn btn-sm btn-primary" href="/delete_drive/{{ obj.id }}">Delete</a>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    </div>
+                  </td>
+                </tr>  
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div> 
+</div>
+</div>
+</div> 
+<div>
+  <br>
+  <div class="pagination justify-content-end">
+   <span>
+    {% if page_obj.has_previous %}
+    <a class="btn btn-sm btn-primary" href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+    <span>{{ page_obj.number }}</span>
+
+    {% if page_obj.has_next %}
+    <a style="margin-right:45px" style="background-color: #825ee4" class="btn btn-sm btn-primary"  href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+
+  </span>
+</div>
+</div>
+{% include "dashboard/footer.html" %}
+
+</div>
+
+{% endblock content %}

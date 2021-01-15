@@ -24,6 +24,7 @@
                   <thead class="thead-light">
                     <tr>
                       <!-- <th scope="col">Client_Id</th> -->
+                      <!-- <th scope="col">Paid</th> -->
                       <th scope="col">Client Name</th>
                       <th scope="col">Policy Type</th>
                       <th scope="col">Phone Number</th>
@@ -38,10 +39,10 @@
                   <tbody>
                     {% for obj in towDaysDues %}
                     <tr>
-
+                      <!-- <td>{{ obj.first_name }}</td> -->
                       <td>{{ obj.first_name }}</td>
                       <td>
-                        {{ obj.get_policy_type_display }}
+                        {{ obj.policy_type }}
                       </td>
                       <td>
                         {{ obj.contact }}
@@ -69,6 +70,7 @@
                   <thead class="thead-light">
                     <tr>
                       <!-- <th scope="col">Client_Id</th> -->
+                      <!-- <th scope="col">Paid</th> -->
                       <th scope="col">Client Name</th>
                       <th scope="col">Policy Type</th>
                       <th scope="col">Phone Number</th>
@@ -86,7 +88,7 @@
 
                       <td>{{ obj.first_name }}</td>
                       <td>
-                        {{ obj.get_policy_type_display }}
+                        {{ obj.policy_type }}
                       </td>
                       <td>
                         {{ obj.contact }}

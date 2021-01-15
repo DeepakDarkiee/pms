@@ -1,4 +1,9 @@
 # base counter for total policy
+import os
+import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rest.settings')
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+django.setup()
 
 def counter(request):
     # from django.contrib.auth.decorators import login_required
@@ -36,3 +41,24 @@ def counter(request):
 
 
 
+import asyncio
+from pms.settings import MAIL
+from dashboard.models import Lic,Drive
+from django.contrib.auth.models import User
+from datetime import datetime, timedelta
+
+
+
+async def main():
+    reminder7day= Lic.objects.filter(renew_date=datetime.now().date()+timedelta(days=7),status=1)     
+    for i in reminder7day:
+        if datetime.now().hour is 15:
+            print(i.email)
+            MAIL(i.email)
+    reminder2day= Lic.objects.filter(renew_date=datetime.now().date()+timedelta(days=2),status=1)     
+    for i in reminder2day:
+        
+            MAIL(i.email)
+
+asyncio.run(main())
+    

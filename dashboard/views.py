@@ -38,7 +38,6 @@ from .resources import LicResource
 from tablib import Dataset
 from .forms import File_Upload 
 
-
 @login_required
 def index(request):
     user = User.objects.get(username = request.user)
@@ -47,15 +46,15 @@ def index(request):
     duesInTwoDays= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=2)],status=1).order_by('renew_date')
     duesInWeek= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).order_by('renew_date')
     
-    reminder7day= Lic.objects.filter(user__pk=user.id,renew_date=datetime.now().date()+timedelta(days=7),status=1)     
-    for i in reminder7day:
-            print(i.email)
-            MAIL(i.email)
+    # reminder7day= Lic.objects.filter(user__pk=user.id,renew_date=datetime.now().date()+timedelta(days=7),status=1)     
+    # for i in reminder7day:
+    #         print(i.email)
+    #         MAIL(i.email)
 
-    reminder2day= Lic.objects.filter(user__pk=user.id,renew_date=datetime.now().date()+timedelta(days=2),status=1)     
-    for i in reminder2day:
-            print(i.email)
-            MAIL(i.email)
+    # reminder2day= Lic.objects.filter(user__pk=user.id,renew_date=datetime.now().date()+timedelta(days=2),status=1)     
+    # for i in reminder2day:
+    #         print(i.email)
+    #         MAIL(i.email)
     
     
     return render(request,'dashboard/index.html',{

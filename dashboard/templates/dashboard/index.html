@@ -21,17 +21,42 @@
                 <h3 style="color: red" class="mb-0">Expire in 5 Days</h3>
               </marquee>
               <br>
+              <div class="modal fade" id="Paymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <form action="" method="post">
+                      The Policy is renewed by date <span id ="Date"></span>
+
+
+                    </form>
+                    <div class="modal-header">
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span style="color:red" aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div style="color: black" class="modal-body">Select "Submit" if you are agree</div>
+                    <div class="modal-footer">
+                      <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Cancel</button>
+                      <a style="background-color: #825ee4" class="btn btn-sm btn-primary" href="#">Submit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
                       <!-- <th scope="col">Client_Id</th> -->
                       <!-- <th scope="col">Paid</th> -->
-                      <th scope="col">Client Name</th>
+
+
+                      <th scope="col">Client Name</>
                       <th scope="col">Policy Type</th>
                       <th scope="col">Phone Number</th>
                       <th scope="col">Expire On</th>
                       <th scope="col">Dues In Days</th>
+                      <th scope="col">Pay For</th>
+                      <th scope="col">Paid</th>
                       <!-- <th scope="col">Policy_Number</th> -->
                       <!-- <th scope="col">Year_OF_Policy</th> -->
                       <!-- <th scope="col">Premium</th> -->
@@ -42,6 +67,7 @@
                   <tbody>
                     
                     {% for obj in weekDues %}
+                      
                       <td>{{ obj.first_name }}</td>
                       <td>
                         {{ obj.policy_type }}
@@ -66,10 +92,12 @@
                                 {% endif %}
                                 {% endfor %}
                               </td>
+                              <td>{{obj.pay_for}}</td>
+                              <td><button type='submit'name='paid' data-toggle="modal" data-target="#Paymodal" onclick="getpolicy(this)" >Paid</button></td>
 
                     </tr>
 
-                    </tr>
+                  
                         
                         {% endfor %}
                   </tbody>
@@ -85,5 +113,17 @@
   {% include "dashboard/footer.html" %}
 
 </div>
+<script>
 
+  function getpolicy(table)
+   {
+
+     var Name= table.parentNode.parentNode.cells[0].innerHTML;
+     var policy_type=table.parentNode.parentNode.cells[1].innerHTML;
+     var phone_no= table.parentNode.parentNode.cells[2].innerHTML;
+     var expire_on=table.parentNode.parentNode.cells[3].innerHTML;
+     var Pay=table.parentNode.parentNode.cells[5].innerHTML;
+alert(Pay);
+   }
+</script>
 {% endblock content %}

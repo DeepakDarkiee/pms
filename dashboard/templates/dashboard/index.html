@@ -6,7 +6,7 @@
   .table .thead-light th {
     background-color: #f6f9fc;
     color: black;
-}
+  }
 </style>
 
 <div class="container-fluid mt--7">
@@ -16,8 +16,10 @@
       <div class="card shadow">
         <div class="card-header border-0">
           <div class="row align-items-center">
-            <div class="col-md-6">
-              <marquee behavior="scroll" direction="up" scrollamount="2"><h3 style="color: red" class="mb-0">Expire in 2 Days</h3></marquee>
+            <div class="col-md-12">
+              <marquee behavior="scroll" direction="up" scrollamount="2">
+                <h3 style="color: red" class="mb-0">Expire in 5 Days</h3>
+              </marquee>
               <br>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
@@ -29,6 +31,7 @@
                       <th scope="col">Policy Type</th>
                       <th scope="col">Phone Number</th>
                       <th scope="col">Expire On</th>
+                      <th scope="col">Dues In Days</th>
                       <!-- <th scope="col">Policy_Number</th> -->
                       <!-- <th scope="col">Year_OF_Policy</th> -->
                       <!-- <th scope="col">Premium</th> -->
@@ -37,55 +40,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for obj in towDaysDues %}
-                    <tr>
-                      <!-- <td>{{ obj.first_name }}</td> -->
-                      <td>{{ obj.first_name }}</td>
-                      <td>
-                        {{ obj.policy_type }}
-                      </td>
-                      <td>
-                        {{ obj.contact }}
-                      </td>
-                      <td>
-                        <span class="badge badge-dot mr-4">
-                          <i class="bg-warning"></i> {{ obj.renew_date }}
-                        </span>
-                      </td>
-
-                    </tr>
-
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-            <div class="col-md-6">
-              <marquee behavior="scroll" direction="up" scrollamount="2"><h3 style="color: red" class="mb-0">Expire in 7 Days</h3></marquee>
-              <br>
-              <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                    <tr>
-                      <!-- <th scope="col">Client_Id</th> -->
-                      <!-- <th scope="col">Paid</th> -->
-                      <th scope="col">Client Name</th>
-                      <th scope="col">Policy Type</th>
-                      <th scope="col">Phone Number</th>
-                      <th scope="col">Expire On</th>
-                      <!-- <th scope="col">Policy_Number</th> -->
-                      <!-- <th scope="col">Year_OF_Policy</th> -->
-                      <!-- <th scope="col">Premium</th> -->
-                      <!-- <th scope="col">Status</th> -->
-                      <!-- <th scope="col">Actions</th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
+                    
                     {% for obj in weekDues %}
-                    <tr>
-
                       <td>{{ obj.first_name }}</td>
                       <td>
                         {{ obj.policy_type }}
@@ -97,16 +53,28 @@
                         <span class="badge badge-dot mr-4">
                           <i class="bg-warning"></i> {{ obj.renew_date }}
                         </span>
+                      
+
+
                       </td>
 
+                     <td>      
+                       {% for key,value  in Due_in_days.items %} 
+                      
+                      {% if key == obj.id %}
+                      {{value}} day
+                                {% endif %}
+                                {% endfor %}
+                              </td>
+
                     </tr>
 
                     </tr>
-                    {% endfor %}
+                        
+                        {% endfor %}
                   </tbody>
                 </table>
               </div>
-
             </div>
           </div>
         </div>
@@ -114,8 +82,8 @@
     </div>
   </div>
 
-{% include "dashboard/footer.html" %}
+  {% include "dashboard/footer.html" %}
 
-</div> 
+</div>
 
 {% endblock content %}

@@ -21,7 +21,7 @@ from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from dashboard.models import Lic,Drive
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta,date
 from django.contrib import messages
 from datetime import datetime, timedelta
 from django.conf import settings
@@ -43,23 +43,19 @@ def index(request):
     user = User.objects.get(username = request.user)
     lics = Lic.objects.filter(user__pk=user.id)
     userMail=request.user.get_username()
-    duesInTwoDays= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=2)],status=1).order_by('renew_date')
-    duesInWeek= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).order_by('renew_date')
+    # duesInTwoDays= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=2)],status=1).order_by('renew_date')
+    duesInWeek= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=5)],status=1).order_by('renew_date')
+    # todays date
+    current_date=date.today()
+    Due_in_days={}
+    for obj in duesInWeek:
     
-    # reminder7day= Lic.objects.filter(user__pk=user.id,renew_date=datetime.now().date()+timedelta(days=7),status=1)     
-    # for i in reminder7day:
-    #         print(i.email)
-    #         MAIL(i.email)
-
-    # reminder2day= Lic.objects.filter(user__pk=user.id,renew_date=datetime.now().date()+timedelta(days=2),status=1)     
-    # for i in reminder2day:
-    #         print(i.email)
-    #         MAIL(i.email)
-    
-    
+        Due_in_days[obj.id]=datetime.strptime(obj.renew_date,'%Y-%m-%d').day-current_date.day
+        print(Due_in_days)
     return render(request,'dashboard/index.html',{
-        'towDaysDues':duesInTwoDays,
-        'weekDues':duesInWeek
+        # 'towDaysDues':duesInTwoDays,
+        'weekDues':duesInWeek,
+        'Due_in_days':Due_in_days
         })
 
 
@@ -141,8 +137,8 @@ def add_policy(request):
         policy_type  = request.POST.get('policy_type')
         obj=PolicyType(policy_type=policy_type,user=user)
         obj.save()
-        messages.success(request, ' Successfully Saved ')
-        return redirect("/add-policy")
+        messages.success(request, 'Successfully Saved ')
+        return HttpResponseRedirect('/add_record')
 
     return render(request,"dashboard/add_policy.html")
 
@@ -220,25 +216,17 @@ class SearchView(ListView):
 def sort_record(request):
     user = User.objects.get(username = request.user)
     sorting = request.GET.get('sorting')
-    lics = Lic.objects.filter(user__pk=user.id)
-    active = Lic.objects.filter(user__pk=user.id,status=1).count()
-    count = lics.count()
-    # print(sorting)
+    lics = Lic.objects.filter(user__pk=user.id) 
+    print(sorting)
     if sorting =='status':
         lics = Lic.objects.filter(user__pk=user.id,status=1).order_by('renew_date')
         return render(request,'dashboard/show_record.html',{
-            'lics':lics,
-             'count':count,
-             'active':active
-
+            'page_obj':lics,
             })  
     else:
-    
         lics = Lic.objects.filter(user__pk=user.id).order_by('-'+sorting)
         return render(request,'dashboard/show_record.html',{
-            'lics':lics,
-            'count':count,
-             'active':active
+            'page_obj':lics,
             })  
 
 

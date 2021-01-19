@@ -40,7 +40,7 @@
                 
                 <td>{{ lic.first_name }}</td>
                 <td>
-                  {{ lic.get_policy_type_display }}
+                  {{ lic.policy_type }}
                 </td>
                 <td>
                   <span class="badge badge-dot mr-4">
@@ -67,11 +67,37 @@
                   </div>
                 </td>  
                 <td>
-                  <div class="d-flex align-items-center">
-                    <a style="color:blue" href="/edit_policy/{{ lic.id }}"><span class="glyphicon glyphicon-pencil" >Edit--</span></a>  
-                    <a style="color: red" href="/delete_policy/{{ lic.id }}">Delete</a>  
-
-                  </div>
+                    <div class="d-flex align-items-center">
+                      <a class="btn btn-sm btn-primary"  style="color:white"  href="/view_policy/{{ lic.id }}"><span class="glyphicon glyphicon-pencil" >View</span></a>
+  
+                      
+                      <a  style="background-color: #825ee4"  class="btn btn-sm btn-primary" href="/edit_policy/{{ lic.id }}" class="dropdown-item">
+                      <span>Edit</span>
+                      </a>
+  
+                      <a  style="background-color: #b80000" data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-primary" href="#" class="dropdown-item">
+                      <span>Delete</span>
+                      </a>
+  
+                      <!-- delete record Modal -->
+                      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h3 class="modal-title" id="exampleModalLabel"><b>Ready to Leave?</b></h3>
+                              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span style="color:red" aria-hidden="true">×</span>
+                              </button>
+                            </div>
+                            <div style="color: black" class="modal-body">Are you sure you want to <span style="color: red" >Delete policy?</span></div>
+                            <div class="modal-footer">
+                              <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Cancel</button>
+                              <a style="background-color: #825ee4" class="btn btn-sm btn-primary" href="{% url 'delete_policy' lic.id %}">Delete</a>
+  
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </td> 
               </div>
             </td>

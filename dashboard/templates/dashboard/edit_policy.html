@@ -25,106 +25,116 @@ color: black;
             
             <div class="row jumbotron">
 
-              <div class="col-sm-12 form-group" style="margin-top: -20px;">
-                <label for="name">First Name :</label>
-                <input type="text" class="form-control" name="first_name" id="name-f" placeholder="Enter your full name." value="{{ lics.first_name }}"/>
+              <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">First Name :</label><span class="required">*</span>
+                <input type="text" class="form-control" name="first_name" id="name-f" placeholder="First Name." value="{{lics.first_name}}" required>
               </div>
-
-              <div class="col-sm-12 form-group" style="margin-top: -20px;">
-                <label for="name">Last Name :</label>
-                <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Enter your full name." value="{{ lics.last_name }}"/>
+              <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Middle Name :</label>
+                <input type="text" class="form-control" name="middle_name" id="name-f" placeholder="Middle Name." value="{{lics.middle_name}}">
+              </div>
+              <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Last Name :</label><span class="required">*</span>
+                <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Last Name." value="{{lics.last_name}}" required>
               </div>
               
               <div class="col-sm-12 form-group">
-                <label for="email">Email :</label>
-                <input type="text" class="form-control" name="email" id="name-l" placeholder="Enter your Email" value="{{ lics.email }}"/>
+                <label for="email">Email :</label><span class="required">*</span>
+                <input type="text" class="form-control" name="email" id="name-l" placeholder="Email" value="{{lics.email}}" required>
               </div>
               <div class="col-sm-6 form-group">
-                <label for="Date">Date of Birth :</label>
-                <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{lics.dob}}"> 
+                <label for="Date">Date of Birth :</label><span class="required">*</span>
+                <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{lics.dob}}" required>
               </div>
               <div class="col-sm-6 form-group">
-                <label for="e_group">Contact No.</label>
-                <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" value="{{ lics.contact }}"/>
+                <label for="e_group">Contact No.</label><span class="required">*</span>
+                <input type="text" class="form-control" name="contact" id="name-f" placeholder="Contact Number" value="{{lics.contact}}" required>
               </div>
               <div class="col-sm-12 form-group">
-                <label for="cost_center">Address line 1</label>
-                <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Enter your Address" value="{{ lics.address_line_one }}"/>
+                <label for="cost_center">Address Line 1</label><span class="required">*</span>
+                <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" value="{{lics.address_line_one}}" required>
               </div>
               <div class="col-sm-12 form-group">
-                <label for="cost_center">Address line 2</label>
-                <input type="text" class="form-control" name="address_line_two" id="cost_center" placeholder="Enter your Address" value="{{ lics.address_line_two }}"/>
+                <label for="cost_center">Address Line 2</label>
+                <input type="text" class="form-control" name="address_line_two" id="cost_center" value="{{lics.address_line_two}}" placeholder="Address Line 2" >
               </div>
               <div class="col-sm-6 form-group">
-            <label for="bname">City</label>
-            <input type="text" class="form-control" name="city" id="name-l" placeholder="Enter  city" value="{{ lics.city }}"/>
+            <label for="bname">Landmark</label>
+            <input type="text" class="form-control" name="lendmark" id="name-l" placeholder="Lendmark" value="{{lics.lendmark}}">
+          </div>
+              <div class="col-sm-6 form-group">
+            <label for="bname">City</label><span class="required">*</span>
+            <input type="text" class="form-control" name="city" id="name-l" placeholder="City" value="{{lics.city}}" required>
           </div>
           <div class="col-sm-6 form-group">
-            <label for="bname">State</label>
-            <input type="text" class="form-control" name="state" id="name-l" placeholder="Enter  state" value="{{ lics.state }}"/>
+            <label for="bname">State</label><span class="required">*</span>
+            <input type="text" class="form-control" name="state" id="name-l" placeholder="State" value="{{lics.state}}" required>
           </div>
-          <div class="col-sm-6 form-group">
-            <label for="bname">Policy Number</label>
-            <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" value="{{ lics.policy_number }}"/>
-          </div>
-          <div class="col-sm-6 form-group">
-            <label for="Dname">Premium</label>
-            <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium" value="{{ lics.premium }}"/>
-          </div>
-
-          <div class="col-sm-6 form-group">
-            <label for="type_of_policy">For pay</label>
-            <select id="inputType" value="{{lics.pay_for}}" name="pay_for" class="form-control browser-default custom-select">
-
-              <!-- <option value="" selected="selected">---------</option> -->
-              {% if lics.policy_type == quarterly %}
-              <option value=quarterly selected="selected" >Quarterly</option>
-              {% else %}
-              <option value=quarterly >quarterly</option>
-              {% endif %}
-              {% if lics.policy_type == six_month %}
-              <option value=six_month selected="selected" >Six Month</option>
-              {% else %}
-              <option value=six_month >six_month</option>
-              {% endif %}
-              {% if lics.policy_type == yearly %}
-              <option value=yearly selected="selected" >Yearly</option>
-              {% else %}
-              <option value=yearly >yearly</option>
-               {% endif %}
-
               
-            </select>
-          </div>
-
-
           <div class="col-sm-6 form-group">
-            <label for="Payslip">Sum Assured</label>
-            <input type="text" class="form-control" name="sum_assured" id="address-1" placeholder="enter sum assured" value="{{ lics.sum_assured }}"/>
+            <label for="bname">Policy Number</label><span class="required">*</span>
+            <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Policy Number" value="{{lics.policy_number}}" required>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="Dname">Premium</label><span class="required">*</span>
+            <input type="text" class="form-control" name="premium" id="name-l" placeholder="Premium" value="{{lics.premium}}" required>
+          </div>
+    
+          <div class="col-sm-6 form-group">
+            <label for="created_on">Start Date</label><span class="required">*</span>
+            <input type="Date" class="form-control" name="created_on" id="PMDate" placeholder="Start Date" value="{{lics.created_on}}"required>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="type_of_policy">Pay Frequency</label><span class="required">*</span>
+            <select id="period"  name="pay_for" value="{{lics.created_on}}" class="form-control browser-default custom-select" required/>
+            <!-- <option disabled>type of policy</option> -->
+            {% if lics.pay_for == 'Monthly' %}
+            <option value=Monthly selected="selected">Monthly</option>
+            {% else %}
+            <option value=Monthly >Monthly</option>
+            {% endif %}
+            {% if lics.pay_for == 'Quarterly' %}
+            <option value=Quarterly selected="selected">Quarterly</option>
+            {% else %}
+            <option value=Quarterly >Quarterly</option>
+            {% endif %}
+            {% if lics.pay_for == 'HalfYear' %}
+            <option value=HalfYear selected="selected">HalfYear</option>
+            {% else %}
+            <option value=HalfYear >HalfYear</option>
+            {% endif %}
+            {% if lics.pay_for == 'Annually' %}
+            <option value=Annually selected="selected">Annually</option>
+            {% else %}
+            <option value=Annually >Annually</option>
+            {% endif %}
+          </select>
+        </div>
+        
+        <div class="col-sm-6 form-group">
+          <label for="renew_date">Renew Date</label>
+          <input type="date" name="renew_date" data-date-format="DD-MM-YYYY" class="form-control datetimepicker" value="{{lics.renew_date}}" id="NPMDate" placeholder="Enter renew date" required readonly>
+          
+        </div>
+        
+          <div class="col-sm-6 form-group">
+            <label for="Payslip">Sum Assured</label><span class="required">*</span>
+            <input type="text" class="form-control" value="{{lics.sum_assured}}" name="sum_assured" id="address-1" placeholder="Sum Assured" required>
           </div>
           
           
           <div class="col-sm-6 form-group">
-            <label for="cc description">Year of Policy</label>
-            <input type="text" class="form-control" name="year_of_policy" id="description" placeholder="Enter year of policy" value="{{ lics.year_of_policy }}"/>
+            <label for="cc description">Year of Policy</label><span class="required">*</span>
+            <input type="text" class="form-control" name="year_of_policy" id="description" placeholder="Year of Policy" value="{{lics.year_of_policy}}" required>
           </div>
           <div class="col-sm-6 form-group">
             <label for="pan_no"> Beneficiary Name</label>
-            <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Enter beneficiary name" value="{{ lics.beneficiary_name }}"/>
+            <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Beneficiary Name" value="{{lics.beneficiary_name}}" >
           </div>
-          <div class="col-sm-6 form-group">
-            <label for="created_on">Created On</label>
-            <input type="text" class="form-control" name="created_on" id="pan-no" placeholder="{{lics.created_on}}" readonly> 
-          </div>
-          <div class="col-sm-6 form-group">
-            <label for="renew_date">Renew Date</label>
-            <input type="Date" name="renew_date" class="form-control" id="Date" placeholder="Enter renew date" value="{{lics.renew_date}}">  
-          </div>
-
           <div class="col-sm-6 form-group">
             <label for="type_of_policy">Policy Type</label>
             <select id="inputType" value="{{lics.policy_type}}" name="type" class="form-control browser-default custom-select">
-
+        
               <!-- <option value="" selected="selected">---------</option> -->
               {% for obj in context %}
               {% if obj.policy_type == lics.policy_type %}
@@ -132,43 +142,47 @@ color: black;
               {% endif %}
              <option value={{obj.policy_type}} >{{obj.policy_type}}</option>
               {% endfor %}
-
+        
               
             </select>
           </div>
-          
-
-          <div class="col-sm-6 form-group">
-            <label for="status">status</label>
-            <select id="inputStatus" name="status" value="{{lics.status}}"  class="form-control browser-default custom-select">   
-
-             {% if lics.status == 1 %}
-              <option value=1 selected="selected" >active</option>
-              {% else %}
-               <option value=1 >active</option>
-               {% endif %}
-                 {% if lics.status == 0 %}
-              <option value=0 selected="selected" >deactive</option>
-              {% else %}
-               <option value=0>deactive</option>
-               {% endif %}
-              </select>
+        <div class="col-sm-6 form-group">
+          <label for="status">status</label>
+          <select id="inputStatus" name="status" value="{{lics.status}}"  class="form-control browser-default custom-select">   
+      
+           {% if lics.status == 1 %}
+            <option value=1 selected="selected" >active</option>
+            {% else %}
+             <option value=1 >active</option>
+             {% endif %}
+               {% if lics.status == 0 %}
+            <option value=0 selected="selected" >deactive</option>
+            {% else %}
+             <option value=0>deactive</option>
+             {% endif %}
+            </select>
+        </div>
+          <div class="col-sm-12">
+            <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
+            </label>
           </div>
+    
           <div class="col-sm-12 form-group mb-0">
-           <button class="btn btn-primary float-right">Update</button>
-         </div>
+            <button class="btn btn-primary float-right">Update</button>
+          </div>
          
        </div>
      </form>
-   </div> 
-</div>
-</div>
-</div>
-</div>
-
-{% include "dashboard/footer.html" %}
-
-</div>
-
-{% endblock content %}
+    </div> 
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    {% include "dashboard/footer.html" %}
+    
+    </div>
+    
+    
+    {% endblock content %}
 

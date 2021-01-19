@@ -106,8 +106,12 @@
         <label for="pan_no"> Beneficiary Name</label>
         <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Beneficiary Name" >
       </div>
+      
       <div class="col-sm-6 form-group">
-        <label for="type_of_policy">Policy Type</label>&nbsp;&nbsp;<a href="/add-policy"><i class="fa fa-plus-circle" aria-hidden="true" style="font-size:18px"></i></a>
+        <label for="type_of_policy">Policy Type</label>
+        <button style="border:none; color:#5e72e4;" type="button" class="fa fa-plus-circle" data-toggle="modal" data-target="#exampleModal">
+        </button>
+       
         <select id="inputType"  name="type" class="form-control browser-default custom-select" required/>
         <!-- <option disabled>type of policy</option> -->
         <option disabled="true" selected="selected">-----Select Policy----</option>{% for obj in context %}
@@ -135,7 +139,39 @@
 
 {% include "dashboard/footer.html" %}
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="myformcont" class="my-2" action="{% url 'add-policy' %}" method="POST">
+          {% csrf_token %}
+          <!-- <h2 class="text-center">LIC Form</h2> -->
+        
+        <div class="col-sm-12 form-group" style="margin-top: -20px;">
+          <label for="name">New Policy-Type :</label><span class="required">*</span>
+          <input type="text" class="form-control" name="policy_type" id="name-f" placeholder="Policy Type" required>
+        </div>          
+        
+        <div class="col-sm-12 form-group mb-0">
+        <button class="btn btn-primary float-right">Submit</button>
+        </div>
+        
+        </form>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
 </div>
 
 
 {% endblock content %}
+
+

@@ -17,9 +17,9 @@ def counter(request):
         # today=datetime.date.today()
         # print(today)
         
-        context = {}
-        data = register_table.objects.get(user__id=request.user.id)
-        context["data"] = data
+        # context = {}
+        # data = register_table.objects.get(user__id=request.user.id)
+        # context["data"] = data
 
         
         user = User.objects.get(username = request.user)
@@ -34,7 +34,7 @@ def counter(request):
         'count':count,
         'active':active,
         'dues':dues,
-        'data': data,
+        # 'data': data,
         'drive':drive,
         }
     return {}
@@ -50,15 +50,12 @@ from datetime import datetime, timedelta
 
 
 async def main():
-    reminder7day= Lic.objects.filter(renew_date=datetime.now().date()+timedelta(days=7),status=1)     
-    for i in reminder7day:
+    reminder5day= Lic.objects.filter(renew_date=datetime.now().date()+timedelta(days=5),status=1)     
+    for i in reminder5day:
         if datetime.now().hour is 15:
             print(i.email)
             MAIL(i.email)
-    reminder2day= Lic.objects.filter(renew_date=datetime.now().date()+timedelta(days=2),status=1)     
-    for i in reminder2day:
-        
-            MAIL(i.email)
+    
 
 asyncio.run(main())
     

@@ -18,20 +18,17 @@
           <div class="row align-items-center">
             <div class="col-md-12">
               <marquee behavior="scroll" direction="up" scrollamount="2">
-                <h3 style="color: red" class="mb-0">Expire in 5 Days</h3>
+                <h3 style="color: red" class="mb-0">Expired</h3>
               </marquee>
 
-              <div class="col text-right" style="margin-top:-30px;">
-                <a href="{% url 'over_due' %}" class="btn btn-danger">({{overDueCount}})&nbsp; Over-Dues</a>
-
-              </div>
+              
               
               <br>
               
               <div class="modal fade" id="Paymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
-                    <form action="{% url 'updateRenewDate' %}" method="POST">
+                    <form action="{% url 'updateRenewDateOverDue' %}" method="POST">
                       {% csrf_token %}  
                     <div style="color: black" class="modal-body"><h2> The Policy is Renewed by Date <span id ="RenewDate"></span></h2></div>
                    <div style='margin-left:20px'>

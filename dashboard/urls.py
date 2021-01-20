@@ -29,6 +29,9 @@ urlpatterns = [
     path('my-drive/', views.my_drive, name='my-drive'),
     path('add-policy/', views.add_policy, name='add-policy'),
     path('delete_drive/<int:id>', views.delete_drive,name='delete_drive'), 
+    path('updateRenewDate/', views.updateRenewDate,name='updateRenewDate'), 
+    path('updateRenewDateOverDue/', views.updateRenewDateOverDue,name='updateRenewDateOverDue'), 
+    path('over_due/', views.over_due,name='over_due'), 
     url(r'^download/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
    
 

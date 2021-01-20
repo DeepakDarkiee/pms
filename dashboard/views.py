@@ -45,17 +45,18 @@ def index(request):
     userMail=request.user.get_username()
     # duesInTwoDays= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=2)],status=1).order_by('renew_date')
     duesInWeek= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=5)],status=1).order_by('renew_date')
-    # todays date
+    Overdues= Lic.objects.filter(user__pk=user.id,renew_date__lt=datetime.now().date(),status=1).order_by('renew_date')
+    overDueCount= Overdues.count()
     current_date=date.today()
     Due_in_days={}
     for obj in duesInWeek:
     
         Due_in_days[obj.id]=datetime.strptime(obj.renew_date,'%Y-%m-%d').day-current_date.day
-        print(Due_in_days)
     return render(request,'dashboard/index.html',{
         # 'towDaysDues':duesInTwoDays,
         'weekDues':duesInWeek,
-        'Due_in_days':Due_in_days
+        'Due_in_days':Due_in_days,
+        'overDueCount':overDueCount
         })
 
 
@@ -171,6 +172,43 @@ def update_policy(request, id):
         lics.save()
         messages.success(request, ' Successfully Updated ')
     return redirect('/show_record')
+
+def updateRenewDate(request):
+    pno=request.POST['PolicyNo']
+    print(pno)
+    lics = Lic.objects.get(policy_number=pno)
+    if request.method == "POST":
+        lics.renew_date  = request.POST.get('RenewDate','')
+        lics.save()
+        messages.success(request, ' Successfully Paid ')
+        return redirect('/index')
+
+def updateRenewDateOverDue(request):
+    print(request.POST)
+    pno=request.POST['PolicyNo']
+    lics = Lic.objects.get(policy_number=pno)
+    if request.method == "POST":
+        lics.renew_date  = request.POST.get('RenewDate','')
+        lics.save()
+        messages.success(request, ' Successfully Paid ')
+        return redirect('/over_due')
+
+
+def over_due(request):
+    user = User.objects.get(username = request.user)
+    lics = Lic.objects.filter(user__pk=user.id)
+    userMail=request.user.get_username()
+    # duesInTwoDays= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=2)],status=1).order_by('renew_date')
+    duesInWeek= Lic.objects.filter(user__pk=user.id,renew_date__lt=datetime.now().date(),status=1).order_by('renew_date')
+    overDueCount= duesInWeek.count()
+    # todays date
+    current_date=date.today()
+    Due_in_days={}
+    for obj in duesInWeek:
+        Due_in_days[obj.id]=datetime.strptime(obj.renew_date,'%Y-%m-%d').day-current_date.day
+    return render(request,'dashboard/over_due.html',{'weekDues':duesInWeek,
+        'Due_in_days':Due_in_days,})
+
 
     
 

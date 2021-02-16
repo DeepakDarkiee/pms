@@ -48,19 +48,24 @@ def index(request):
     lics = Lic.objects.filter(user__pk=user.id)
     userMail=request.user.get_username()
     # duesInTwoDays= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=2)],status=1).order_by('renew_date')
-    duesInWeek= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=5)],status=1).order_by('renew_date')
+    duesInWeekPolicy= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=5)],status=1).order_by('renew_date')
     Overdues= Lic.objects.filter(user__pk=user.id,renew_date__lt=datetime.now().date(),status=1).order_by('renew_date')
     overDueCount= Overdues.count()
+    duesInWeekFund= Mutual_Fund.objects.filter(user__pk=user.id,renew_date__lt=datetime.now().date(),status=1).order_by('renew_date')
+    overDuefund= duesInWeekFund.count()
     current_date=date.today()
     Due_in_days={}
-    for obj in duesInWeek:
+    for obj in duesInWeekPolicy:
     
         Due_in_days[obj.id]=datetime.strptime(obj.renew_date,'%Y-%m-%d').day-current_date.day
     return render(request,'dashboard/index.html',{
         # 'towDaysDues':duesInTwoDays,
-        'weekDues':duesInWeek,
+        'duesInWeekPolicy':duesInWeekPolicy,
+        'duesInWeekFund':duesInWeekFund,
         'Due_in_days':Due_in_days,
-        'overDueCount':overDueCount
+        'overDueCount':overDueCount,
+        'overDuefund':overDuefund,
+
         })
 
 
@@ -177,6 +182,26 @@ class SearchFundView(ListView):
             Q(first_name__icontains=query) | Q(folio_no__icontains=query)
         )
         return object_list
+
+
+
+def fund_over_due(request):
+    user = User.objects.get(username = request.user)
+    funds = Mutual_Fund.objects.filter(user__pk=user.id)
+    userMail=request.user.get_username()
+    # duesInTwoDays= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=2)],status=1).order_by('renew_date')
+    duesInWeek= Mutual_Fund.objects.filter(user__pk=user.id,renew_date__lt=datetime.now().date(),status=1).order_by('renew_date')
+    overDuefund= duesInWeek.count()
+    # todays date
+    current_date=date.today()
+    Due_in_days={}
+    for obj in duesInWeek:
+        Due_in_days[obj.id]=datetime.strptime(obj.renew_date,'%Y-%m-%d').day-current_date.day
+    return render(request,'dashboard/fund_over_due.html',{'weekDues':duesInWeek,
+        'Due_in_days':Due_in_days,})
+
+
+
 
 
 

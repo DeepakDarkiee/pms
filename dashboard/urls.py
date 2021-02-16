@@ -22,7 +22,7 @@ urlpatterns = [
     path('export-fund/',export_fund, name="export-fund"), 
     path('import-fund/',import_fund, name="import-fund"), 
     path('search-mutual-fund/',views.SearchFundView.as_view(),name='search-mutual-fund'),
-    
+    path('fund-over-due/', views.fund_over_due,name='fund-over-due'), 
 
 
 

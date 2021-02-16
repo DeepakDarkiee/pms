@@ -1,5 +1,4 @@
-{% extends 'dashboard/base_dashboard.html' %}
-
+{% extends 'dashboard/base_mutual.html' %}
 {% block content %}
 
 <style type="text/css">
@@ -18,20 +17,15 @@
           <div class="row align-items-center">
             <div class="col-md-12">
               <marquee behavior="scroll" direction="up" scrollamount="2">
-                <h3 style="color: red" class="mb-0">Expire in 7 Days</h3>
-              </marquee>
-
-              <div class="col text-right" style="margin-top:-30px;">
-                <a href="{% url 'over_due' %}" class="btn btn-danger">({{overDueCount}})&nbsp; Over-Dues</a>
-
-              </div>
+                <h3 style="color: red" class="mb-0">Expired</h3>
+              </marquee>              
               
               <br>
               
               <div class="modal fade" id="Paymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
-                    <form action="{% url 'updateRenewDate' %}" method="POST">
+                    <form action="{% url 'updateRenewDateOverDue' %}" method="POST">
                       {% csrf_token %}  
                     <div style="color: black" class="modal-body"><h2> The Policy is Renewed by Date <span id ="RenewDate"></span></h2></div>
                    <div style='margin-left:20px'>
@@ -59,17 +53,13 @@
 
 
                       <th scope="col">Client Name</>
-                      <th scope="col">Policy Type</th>
+                      <th scope="col">Folio No</th>
                       <th scope="col">Phone Number</th>
                       <th scope="col">Expire On</th>
                       <th scope="col">Dues In Days</th>
                       <th scope="col">Pay For</th>
                       <th scope="col">Pay</th>
-                      <!-- <th scope="col">Policy_Number</th> -->
-                      <!-- <th scope="col">Year_OF_Policy</th> -->
-                      <!-- <th scope="col">Premium</th> -->
-                      <!-- <th scope="col">Status</th> -->
-                      <!-- <th scope="col">Actions</th> -->
+                      
                     </tr>
                   </thead>
                   <tbody>
@@ -79,17 +69,14 @@
                       
                       <td>{{ obj.first_name }}</td>
                       <td>
-                        {{ obj.policy_type }}
+                        {{ obj.folio_no }}
                       </td>
                       <td>
-                        {{ obj.contact }}
+                        {{ obj.contact_no }}
                       </td>
                       <td>
                     
                            {{ obj.renew_date }}
-                  
-                      
-
 
                       </td>
 
@@ -175,14 +162,3 @@ document.getElementById("RenewDate").innerHTML=result_date;
 <link rel="stylesheet" href="sweetalert2.min.css">
 
 {% endblock content %}
-
-
-
-
-
-
-
-
-
-
-

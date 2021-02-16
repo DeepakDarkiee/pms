@@ -2,73 +2,394 @@
 
 {% block content %}
 
-<style type="text/css">
-  .table .thead-light th {
-    background-color: #f6f9fc;
-    color: black;
-  }
-</style>
+
 
 <div class="container-fluid mt--7">
   <!-- Table -->
-  <div class="row">
-    <div class="col">
-      <div class="card shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h1 class="card-title">Policy Indicator</h1>
- 
-                      <a href="#" class="btn btn-warning btn">(0) Under Dues</a>
-                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
-                    </div>
-                  </div>
+ <div class="row mt-5">
+        <div class="col-xl-6 mb-5 mb-xl-0">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Policy Indicator</h3>
                 </div>
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                      <h1 class="card-title">Mutual Fund Indicator </h1>
-
-                      <a href="#" class="btn btn-warning btn">(0 Under Dues</a>
-                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
-                    </div>
-                  </div>
+                
+                <div class="col text-right">
+                  <a href="{% url 'over_due' %}" class="btn btn-danger btn-sm">({{overDueCount}})&nbsp; Over-Dues</a>
                 </div>
-              </div>
 
-              <div class="row" style="padding-top:3%">
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h1 class="card-title">Insurance Indicator</h1>
-
-                    <a href="#" class="btn btn-warning btn">(0) Under Dues</a>
-                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
+              <div class="modal fade" id="Paymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <form action="{% url 'updateRenewDate' %}" method="POST">
+                      {% csrf_token %}  
+                    <div style="color: black" class="modal-body"><h2> The Policy is Renewed by Date <span id ="RenewDate"></span></h2></div>
+                   <div style='margin-left:20px'>
+                      
+                    <b> Policy No  &nbsp;&nbsp;:   </b> <input style='border:none;'type="text" id="#PolicyNo" name="PolicyNo" readonly ><br><br>
+                     <b> Renew Date  &nbsp;  :  </b>  <input  style='border:none;' type="text" id="#RenewDate" name="RenewDate" readonly ><br><br>
+                    <b>Pay Frequency : </b><input  style='border:none;' type="text" id="#PayFrequency" name="PayFrequency" readonly>
+                    </div>
                     
+
+                    <div class="modal-footer">
+                      <button class="btn btn-sm btn-danger " type="button" data-dismiss="modal">Cancel</button>
+                      <button type='submit' class="btn btn-sm btn-success"  name='submit' value='Paid'>Pay</button>
+                    </div>
+                    </form>
                   </div>
                 </div>
+              </div>  
               </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h1 class="card-title">Govt Scheme Indicator</h1>
-                    <a href="#" class="btn btn-warning btn">(0) Under Dues</a>
-                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
-                  </div>
+
+
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <!-- <th scope="col">Client_Id</th> -->
+                      <!-- <th scope="col">Paid</th> -->
+
+
+                      <th scope="col">Client Name</>
+                      <th scope="col">Policy Type</th>
+                      <th scope="col">Expire On</th>
+                      <th scope="col">Dues In Days</th>
+                      <th scope="col">Pay For</th>
+                      <th scope="col">Pay</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    
+                    {% for obj in duesInWeekPolicy %}
+                      
+                      <td>{{ obj.first_name }}</td>
+                      
+                      <td>
+                        {{ obj.policy_type }}
+                      </td>
+                      
+                      <td>
+                    
+                           {{ obj.renew_date }}
+
+                      </td>
+
+                     <td>      
+                       {% for key,value  in Due_in_days.items %} 
+                      
+                      {% if key == obj.id %}
+                      {{value}} day
+                                {% endif %}
+                                {% endfor %}
+                              </td>
+                              <td>{{obj.pay_for}}</td>
+                              <td><button type='submit'name='paid'  class='btn btn-sm btn-success'data-toggle="modal" data-target="#Paymodal" onclick="getpolicy(this,{{obj.policy_number}})" >Pay</button></td>
+
+                    </tr>
+
+                  
+                        
+                        {% endfor %}
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Mutual Fund Indicator</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="{% url 'fund-over-due' %}" class="btn btn-danger btn-sm">({{overDuefund  }})&nbsp; Over-Dues</a>
                 </div>
               </div>
-            </div>              
-            <br>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <!-- <th scope="col">Client_Id</th> -->
+                      <!-- <th scope="col">Paid</th> -->
+
+
+                      <th scope="col">Client Name</>
+                      <th scope="col">Folio No</th>
+                      <th scope="col">Expire On</th>
+                      <th scope="col">Dues In Days</th>
+                      <th scope="col">Pay For</th>
+                      <th scope="col">Pay</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    
+                    {% for obj in duesInWeekFund %}
+                      
+                      <td>{{ obj.first_name }}</td>
+                      <td>
+                        {{ obj.folio_no }}
+                      </td>
+                      
+                      <td>
+                    
+                           {{ obj.renew_date }}
+                
+
+                      </td>
+
+                     <td>      
+                       {% for key,value  in Due_in_days.items %} 
+                      
+                      {% if key == obj.id %}
+                      {{value}} day
+                                {% endif %}
+                                {% endfor %}
+                              </td>
+                              <td>{{obj.pay_for}}</td>
+                              <td><button type='submit'name='paid'  class='btn btn-sm btn-success'data-toggle="modal" data-target="#Paymodal" onclick="getpolicy(this,{{obj.policy_number}})" >Pay</button></td>
+
+                    </tr>
+
+                  
+                        
+                        {% endfor %}
+                  </tbody>
+                </table>
+
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+      <div class="row mt-5">
+        <div class="col-xl-6 mb-5 mb-xl-0">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Insurance Indicator</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-danger">Over Dues</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Page name</th>
+                    <th scope="col">Visitors</th>
+                    <th scope="col">Unique users</th>
+                    <th scope="col">Bounce rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      /argon/
+                    </th>
+                    <td>
+                      4,569
+                    </td>
+                    <td>
+                      340
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-up text-success mr-3"></i> 46,53%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/index.html
+                    </th>
+                    <td>
+                      3,985
+                    </td>
+                    <td>
+                      319
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-down text-warning mr-3"></i> 46,53%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/charts.html
+                    </th>
+                    <td>
+                      3,513
+                    </td>
+                    <td>
+                      294
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-down text-warning mr-3"></i> 36,49%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/tables.html
+                    </th>
+                    <td>
+                      2,050
+                    </td>
+                    <td>
+                      147
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-up text-success mr-3"></i> 50,87%
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      /argon/profile.html
+                    </th>
+                    <td>
+                      1,795
+                    </td>
+                    <td>
+                      190
+                    </td>
+                    <td>
+                      <i class="fas fa-arrow-down text-danger mr-3"></i> 46,53%
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Govt Scheme</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-danger">Over Dues</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Referral</th>
+                    <th scope="col">Visitors</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      Facebook
+                    </th>
+                    <td>
+                      1,480
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">60%</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Facebook
+                    </th>
+                    <td>
+                      5,480
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">70%</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Google
+                    </th>
+                    <td>
+                      4,807
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">80%</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Instagram
+                    </th>
+                    <td>
+                      3,678
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">75%</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      twitter
+                    </th>
+                    <td>
+                      2,645
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">30%</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
 
   {% include "dashboard/footer.html" %}
 
@@ -126,3 +447,6 @@ document.getElementById("RenewDate").innerHTML=result_date;
 <link rel="stylesheet" href="sweetalert2.min.css">
 
 {% endblock content %}
+
+
+

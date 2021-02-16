@@ -97,9 +97,37 @@ color: black;
 
       
       <div class="col-sm-4 form-group">
-        <label for="bname">Pay Frequency </label><span class="required">*</span>
-        <input type="text" class="form-control" name="pay_for" id="name-l" placeholder="Folio No" value="{{funds.pay_for}}" required>
-      </div>
+            <label for="type_of_policy">Pay Frequency</label><span class="required">*</span>
+            <select id="period"  name="pay_for" value="{{funds.created_on}}" class="form-control browser-default custom-select" required>
+
+            <!-- <option disabled>type of policy</option> -->
+            {% if funds.pay_for == 'Monthly' %}
+            <option value=Monthly selected="selected">Monthly</option>
+            {% else %}
+            <option value=Monthly >Monthly</option>
+            {% endif %}
+            {% if funds.pay_for == 'Quarterly' %}
+            <option value=Quarterly selected="selected">Quarterly</option>
+            {% else %}
+            <option value=Quarterly >Quarterly</option>
+            {% endif %}
+            {% if funds.pay_for == 'HalfYear' %}
+            <option value=HalfYear selected="selected">HalfYear</option>
+            {% else %}
+            <option value=HalfYear >HalfYear</option>
+            {% endif %}
+            {% if funds.pay_for == 'Annually' %}
+            <option value=Annually selected="selected">Annually</option>
+            {% else %}
+            <option value=Annually >Annually</option>
+            {% endif %}
+            {% if funds.pay_for == 'OneTime' %}
+            <option value=OneTime selected="selected">OneTime</option>
+            {% else %}
+            <option value=OneTime >OneTime</option>
+            {% endif %}
+          </select>
+        </div>
 
       <div class="col-sm-4 form-group">
         <label for="bname">Due Date</label><span class="required">*</span>

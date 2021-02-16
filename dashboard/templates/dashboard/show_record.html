@@ -1,4 +1,4 @@
-  {% extends 'dashboard/base.html' %}
+{% extends 'dashboard/base.html' %}
 {% block content %}
 
 <style type="text/css">
@@ -14,6 +14,7 @@
      text-align: center;
  }
 </style>
+
 
 <!-- edit record Modal 
 /edit_policy/{{ lic.id }}
@@ -63,13 +64,13 @@
             <thead class="thead-light">
               <tr>
                 <!-- <th scope="col">Client_Id</th> -->
-                <th scope="col">Client_Name</th>
-                <th scope="col">Policy_Type</th>
-                <th scope="col">Policy_Number</th>
-                <th scope="col">Year_OF_Policy</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Policy Type</th>
+                <th scope="col">Policy Number</th>
+                <th scope="col">Premium Paying Term</th>
                 <th scope="col">Premium</th>
                 <th scope="col">Status</th>
-                <th scope="col"><span style="color: white">....</span>Actions_Records</th>                
+                <th scope="col"><span style="color: white">.......</span>Actions</th>                
               </tr>
             </thead>
             <tbody>
@@ -106,15 +107,19 @@
                 </td>  
                 <td>
                   <div class="d-flex align-items-center">
-                    <a class="btn btn-sm btn-primary"  style="color:white"  href="/view_policy/{{ lic.id }}"><span class="glyphicon glyphicon-pencil" >View</span></a>
 
-                    
-                    <a  style="background-color: #825ee4"  class="btn btn-sm btn-primary" href="/edit_policy/{{ lic.id }}" class="dropdown-item">
-                    <span>Edit</span>
+
+                     <a  style="background-color: #825ee4"  class="btn btn-sm btn-primary" href="/edit_policy/{{ lic.id }}" class="dropdown-item">
+                    <span><i class="fas fa-edit"></i></span>
                     </a>
 
+                    
+                    <a class="btn btn-sm btn-primary"  style="color:white"  href="/view_policy/{{ lic.id }}"><span class="glyphicon glyphicon-pencil" ><i class="fas fa-eye"></i></span></a>
+
+                    
+                   
                     <a  style="background-color: #b80000" data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-primary" href="#" class="dropdown-item">
-                    <span>Delete</span>
+                    <span><i class="fas fa-trash-alt"></i></span>
                     </a>
 
                     <!-- delete record Modal -->
@@ -171,8 +176,7 @@
                             </button>
                           </div>
                           <div style="color: black" class="modal-body">Import your data in Particular Formate <span > Choose One Of Them</span>
-                          <p><b>Please add atleast one record Manually</b>  
-                          <span style="color: red"> Unless Import<br> Button will not Work!</span></p>
+                        
                           </div>
               
                           <form method="post" enctype="multipart/form-data" action="{% url 'import_data' %}">

@@ -1,0 +1,236 @@
+{% extends 'dashboard/base_mutual.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Add Mutual Fund </h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="{% url 'add-mutual-fund' %}" method="POST">
+            {% csrf_token %}
+            <!-- <h2 class="text-center">LIC Form</h2> -->
+            <div class="row jumbotron">
+
+          <div class="col-sm-4 form-group">
+            <label for="name">First Name :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="first_name" id="name-f" placeholder="First Name." required>
+          </div>
+          
+          <div class="col-sm-4 form-group">
+            <label for="name">Last Name :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Last Name." required>
+          </div>
+
+          <div class="col-sm-4 form-group">
+            <label for="Date">Date of Birth :</label><span class="required">*</span>
+            <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" required>
+          </div>
+          
+          <div class="col-sm-4 form-group">
+            <label for="email">Email :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="email" id="name-l" placeholder="Email" required>
+          </div>
+          
+          <div class="col-sm-4 form-group">
+            <label for="e_group">Contact No.</label><span class="required">*</span>
+            <input type="text" class="form-control" name="contact_no" id="name-f" placeholder="Contact Number" required>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="cost_center">Address Line 1</label><span class="required">*</span>
+            <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" required>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="cost_center">Address Line 2</label>
+            <input type="text" class="form-control" name="address_line_two" id="cost_center" placeholder="Address Line 2" >
+          </div>
+          <div class="col-sm-4 form-group">
+        <label for="bname">Landmark</label>
+        <input type="text" class="form-control" name="lendmark" id="name-l" placeholder="Landmark">
+      </div>
+          <div class="col-sm-4 form-group">
+        <label for="bname">City</label><span class="required">*</span>
+        <input type="text" class="form-control" name="city" id="name-l" placeholder="City" required>
+      </div>
+
+        <div class="col-sm-4 form-group">
+        <label for="state">State</label><span class="required">*</span>
+        <select   name="state" class="form-control browser-default custom-select" required/>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select ----</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+
+      </select>
+    </div>
+  
+
+      <div class="col-sm-4 form-group">
+        <label for="created_on">Statement Date</label><span class="required">*</span>
+        <input type="Date" class="form-control" name="statement_date" id="PMDate" placeholder="Start Date" required>
+      </div>
+
+       
+       <div class="col-sm-4 form-group">
+        <label for="bname">Folio No </label><span class="required">*</span>
+        <input type="text" class="form-control" name="folio_no" id="name-l" placeholder="Folio No" required>
+      </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="state">Company Name </label><span class="required">*</span>
+    <select name="company_name" class="form-control browser-default custom-select" required/>
+    <option value="--select--">--select--</option>
+    <option value="APOLLO MUNICH GIC LTD">APOLLO MUNICH GIC LTD</option>
+    <option value="Bajaj">Bajaj</option>
+    <option value="BAJAJ ALLINZ GIC LTD">BAJAJ ALLINZ GIC LTD</option>
+    <option value="BHARTI AXA GIC LTD">BHARTI AXA GIC LTD</option>    
+    <option value="FUTURE GENERALLY GIC LTD">FUTURE GENERALLY GIC LTD</option>
+    <option value="GO-DIGIT GIC LTD">GO-DIGIT GIC LTD</option>
+    <option value="hdfc bank">hdfc bank</option>
+    <option value="HDFC ERGO GIC LTD">HDFC ERGO GIC LTD</option>
+    <option value="HDFC Life">HDFC Life</option>
+    <option value="ICICI LOMBARD GIC LTD">ICICI LOMBARD GIC LTD</option>
+    <option value="Iffco Tokio">Iffco Tokio</option>
+    <option value="IFFCO TOKIO GIC LTD">IFFCO TOKIO GIC LTD</option>
+    <option value="Kotak Life Insurance Company">Kotak Life Insurance Company</option>
+    <option value="LIBERTY INSURANCE CO LTD">LIBERTY INSURANCE CO LTD</option>
+    <option value="LIC">LIC</option>
+    <option value="LIC OF INDIA">LIC OF INDIA</option>
+    <option value="Life">Life</option>
+    <option value="Life insurance corporation of india">Life insurance corporation of india</option>
+    <option value="Max Bhupa">Max Bhupa</option>
+
+  </select>
+    </div>
+
+    <div class="col-sm-4 form-group">
+        <label for="Dname">Premium Amount</label><span class="required">*</span>
+        <input type="text" class="form-control" name="premium" id="name-l" placeholder="Premium Amount" required>
+      </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="created_on">Start Date</label><span class="required">*</span>
+        <input type="Date" class="form-control" name="created_on" id="PMDate" placeholder="Start Date" required>
+      </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="type_of_policy">Pay Frequency</label><span class="required">*</span>
+        <select id="period"  name="pay_for" class="form-control browser-default custom-select" required/>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select ----</option>
+        <option value="Monthly">Monthly</option>
+        <option value="Quarterly">Quarterly</option>
+        <option value="HalfYear">HalfYear</option>
+        <option value="Annually">Annually</option>
+        <option value="OneTime">OneTime</option>
+      </select>
+    </div>
+    
+    <div class="col-sm-4 form-group">
+      <label for="renew_date">Due Date </label>
+      <input type="date" name="renew_date" data-date-format="DD-MM-YYYY" class="form-control datetimepicker"  id="NPMDate" placeholder="Enter renew date" required readonly>
+      
+    </div>
+
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Bank_Name</label>
+      <input type="text" class="form-control" name="bank_name" id="cost_center" placeholder="Bank_Name" >
+    </div> 
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">IFSC Code</label>
+      <input type="text" class="form-control" name="ifsc_code" id="cost_center" placeholder="IFSC Code" >
+    </div> 
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Account_No</label>
+      <input type="text" class="form-control" name="account_no" id="cost_center" placeholder="Account_No" >
+    </div>  
+
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Name of the Unit holder</label>
+      <input type="text" class="form-control" name="name_holder" id="cost_center" placeholder="Name of the Unit holder" >
+    </div>  
+
+        
+
+      
+    
+    <div class="col-sm-4 form-group">
+        <label for="state">Tax Status </label><span class="required">*</span>
+        <select   name="tax_status" class="form-control browser-default custom-select" required/>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select ----</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        
+        
+      </select>
+    </div>
+
+    <div class="col-sm-4 form-group">
+        <label for="state">Mode of Holding  </label><span class="required">*</span>
+        <select   name="mode_of_holding" class="form-control browser-default custom-select" required/>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select ----</option>
+        <option value="Single">Single</option>
+        <option value="Family">Family</option>
+        
+        
+      </select> 
+    </div>
+
+      <div class="col-sm-12">
+        <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
+        </label>
+      </div>
+
+      <div class="col-sm-12 form-group mb-0">
+       <button class="btn btn-primary float-right">Submit</button>
+     </div>
+     
+   </div>
+ </form>
+</div> 
+</div>
+</div>
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+{% endblock content %}
+
+

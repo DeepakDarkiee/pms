@@ -1,0 +1,212 @@
+{% extends 'dashboard/base4.html' %}
+{% block content %}
+
+<style type="text/css">
+  .table .thead-light th {
+    background-color: #f6f9fc;
+    color: black;  
+  }  
+  .success{
+     list-style: none;
+     background-color: #2e6da4;
+     color: white;
+     box-shadow: 12px 12px 12px #e61c66;
+     text-align: center;
+ }
+</style>
+
+
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+
+              <a  style="background-color: #5e72e4" data-toggle="modal" data-target="#impModal" class="btn btn-sm btn-primary" href="#" class="dropdown-item">
+              <span>Import</span>
+              </a>
+
+              <a  style="background-color: #8965e0" data-toggle="modal" data-target="#exportModal" class="btn btn-sm btn-primary" href="#" class="dropdown-item">
+              <span>Export</span>
+              </a>  
+
+
+            </div>
+                        
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Client Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact No</th>
+                <!-- <th scope="col">Address</th> -->
+                <th scope="col">Inquiry Date </th>
+                <th scope="col">History </th>
+                <th scope="col"><span style="color: white">......</span>Actions</th>                
+              </tr>
+            </thead>
+            <tbody> 
+              {% for lead in page_object %}  
+              <tr>
+
+                <td>{{ lead.full_name }}</td>
+
+                <td>
+                  {{ lead.email }}
+                </td>
+
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i> {{ lead.contact_no }}
+                  </span>
+                </td>
+                
+
+                <td>
+                  <div class="d-flex align-items-center">
+                    <span class="mr-2">{{ lead.inquiry_date }}</span>
+
+                  </div>
+                </td> 
+
+                <td>
+                  <div class="d-flex align-items-center">
+                    <a  style="background-color: #11cdef;margin-left: 10px  " class="btn btn-sm btn-primary" href="/edit-history/{{ lead.id }}" class="dropdown-item">
+                    <span><i class="fas fa-history"></i></span>
+                    </a>
+
+                  </div>
+                </td> 
+
+                <td>
+                  <div class="d-flex align-items-center" style="margin-left:0px">
+
+
+                   <a  style="background-color: #825ee4"  class="btn btn-sm btn-primary" href="/edit-lead/{{ lead.id }}" class="dropdown-item">
+                    <span><i class="fas fa-edit"></i></span>
+                    </a>
+
+                    
+                    <a class="btn btn-sm btn-primary"  style="color:white"  href="/view-lead/{{ lead.id }}"><span class="glyphicon glyphicon-pencil" ><i class="fas fa-eye"></i></span></a>
+
+                    
+                   
+                    <a  style="background-color: #b80000" data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-primary" href="#" class="dropdown-item">
+                    <span><i class="fas fa-trash-alt"></i></span>
+                    </a>
+
+                    <!-- delete record Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel"><b>Ready to Leave?</b></h3>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span style="color:red" aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div style="color: black" class="modal-body">Are you sure you want to <span style="color: red" >Delete Customer Inquiry?</span></div>
+                          <div class="modal-footer">
+                            <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Cancel</button>
+                            <a style="background-color: #825ee4" class="btn btn-sm btn-primary" href="{% url 'delete-lead' lead.id %}">Delete</a>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </td> 
+              </div>
+            </td>
+          </tr>
+
+        </tr>
+        <!-- export record Modal -->
+                    <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel"><b>Ready to Export?</b></h3>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span style="color:red" aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div style="color: black" class="modal-body">Please select format of file. <span style="color: red"> Choose One Of Them</span></div>
+                         <form method="post" enctype="multipart/form-data" action="/export-lead/">
+                          {% csrf_token %}                          
+                          <select name="file-format" class="form-control my-3" required>
+                            <option disabled="true" value="" selected>Choose format...</option >
+                            <option>CSV</option>
+                            <option>JSON</option>
+                            <option>XLS (Excel)</option>
+                          </select>
+                          <button   style="margin-bottom:10px; margin-left:83%; margin-right: 4%" class="btn btn-sm btn-primary" type="submit">Export</button>
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                     <!-- import record Modal -->
+                    <div class="modal fade" id="impModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel"><b>Ready to Import?</b></h3>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                              <span style="color:red" aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div style="color: black" class="modal-body">Import your data in Particular Formate <span > Choose One Of Them</span>
+                          
+                          </div>
+              
+                          <form method="post" enctype="multipart/form-data" action="{% url 'import-lead' %}">
+                            {% csrf_token %}
+                            <input type="file" name="importData" style="margin-left:20px">
+                            <select name="file-format" class="form-control my-3" required="">
+                              <option disabled="true" value="" selected>Choose format...</option>
+                              <option>CSV</option>
+                              <option>XLS (Excel)</option>
+                              <option>JSON</option>
+                            </select>
+                            <button   style="margin-bottom:10px; margin-left:83%;margin-right: 4%" class="btn btn-sm btn-primary" type="submit">import</button>
+                          </form>
+                          
+                        </div>
+                      </div>
+                    </div>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div> 
+
+</div>
+</div>
+</div> 
+<div>
+  <br>
+  <div class="pagination justify-content-end">
+  <span>
+    {% if page_object.has_previous %}
+    <a class="btn btn-sm btn-primary" href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+    <span>{{ page_object.number }}</span>
+
+    {% if page_object.has_next %}
+    <a style="margin-right:45px" style="background-color: #825ee4" class="btn btn-sm btn-primary"  href="?page={{page_obj.next_page_number}}">Next</a>
+    {% endif %}
+
+  </span>
+</div>
+</div>
+{% include "dashboard/footer.html" %}
+
+</div>
+
+{% endblock content %}

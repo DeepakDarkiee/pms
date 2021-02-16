@@ -1,0 +1,167 @@
+{% extends 'dashboard/base4.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Customer Lead</h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="{% url 'lead' %}" method="POST">
+            {% csrf_token %}
+
+            <!-- <h2 class="text-center">LIC Form</h2> -->
+            <div class="row jumbotron">
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Full Name :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="full_name" id="name-f" placeholder="Full Name" required>
+          </div>      
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Email :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="email" id="name-f" placeholder="Email" required>
+          </div>
+          <br>
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Contact No :</label><span class="required">*</span>
+            <input type="number" class="form-control" name="contact_no" id="name-f" placeholder="Contact No" required>
+          </div>
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Company Name :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="companay_name" id="name-f" placeholder="Company Name" required>
+          </div> 
+
+           <div class="col-sm-4 form-group" >
+            <label for="name">Address :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="address" id="name-f" placeholder="Address" required>
+          </div> 
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Area :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="area" id="name-f" placeholder="Area" required>
+          </div>
+
+      
+
+          <div class="col-sm-4 form-group" > 
+            <label for="name">City :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="city" id="name-f" placeholder="City" required>
+          
+          </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="state">State</label><span class="required">*</span>
+        <select   name="state" class="form-control browser-default custom-select" required/>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select ----</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
+
+      </select>
+    </div>
+          
+          <div class="col-sm-4 form-group" >
+            <label for="name">Inquiry Date :</label><span class="required">*</span>
+            <input type="date" class="form-control" name="inquiry_date" id="name-f" placeholder="Inquiry Date" required>
+          </div>  
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Inquiry Time :</label><span class="required">*</span>
+            <input type="time" class="form-control" name="inquiry_time" id="name-f" placeholder="Inquiry Time" required>
+          </div> 
+
+          <!-- <div class="col-sm-4 form-group" >
+            <label for="name">Lead Source :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="lead_source" id="name-f" placeholder="Lead Source " required>
+          </div>  -->
+
+
+        <div class="col-sm-4 form-group">
+        <label for="state">Lead Source</label><span class="required">*</span>
+        <select   name="lead_source" class="form-control browser-default custom-select" required/>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select ----</option>
+        <option value="News Paper">News Paper</option>
+        <option value="Magazine">Magazine</option>
+        <option value="Advertising">Advertising</option>
+        <option value="Google">Google</option>
+        <option value="Gmail">Gmail</option>
+        <option value="Friends Reference">Friends Reference</option>
+        
+      </select>
+    </div>
+
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Lead Allocated To :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="lead_allocated_to" id="name-f" placeholder="Lead Allocated To" required>
+          </div>
+
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Follow Up Date  :</label><span class="required">*</span>
+            <input type="Date" class="form-control" name="follow_up_date" id="name-f" placeholder="Follow Up Date" required>
+          </div>
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Follow Up Time  :</label><span class="required">*</span>
+            <input type="time" class="form-control" name="follow_up_time" id="name-f" placeholder="Follow Up Time" required>
+          </div>
+
+          <div class="col-sm-4 form-group" >
+            <label for="name">Summary of Discussion :</label><span class="required">*</span>
+            <textarea class="form-control" name="message" id="name-f" placeholder="Message" required ></textarea>
+
+          </div>    
+ 
+      <div class="col-sm-12 form-group mb-0">
+       <button class="btn btn-primary float-right">Submit</button>
+     </div>
+     
+   </div>
+ </form>
+</div> 
+</div>
+</div>  
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+</div>
+
+
+{% endblock content %}

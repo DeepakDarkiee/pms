@@ -1,0 +1,183 @@
+{% extends 'dashboard/base_mutual.html' %}
+{% block content %}
+<style>
+.form-control {
+color: black;   
+}  
+</style>
+
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Update Mutual Fund </h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="/update-fund/{{funds.id}}" method="POST">
+            {% csrf_token %}
+            <!-- <h2 class="text-center">LIC Form</h2> -->
+            <div class="row jumbotron">
+
+          <div class="col-sm-4 form-group">
+            <label for="name">First Name :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="first_name" id="name-f" placeholder="First Name." value="{{funds.first_name}}" required>
+          </div>
+          
+          <div class="col-sm-4 form-group">
+            <label for="name">Last Name :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Last Name." value="{{funds.last_name}}" required>
+          </div>
+
+          <div class="col-sm-4 form-group">
+            <label for="Date">Date of Birth :</label><span class="required">*</span>
+            <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{funds.dob}}" required>
+          </div>
+          
+          <div class="col-sm-4 form-group">
+            <label for="email">Email :</label><span class="required">*</span>
+            <input type="text" class="form-control" name="email" id="name-l" placeholder="Email" value="{{funds.email}}" required>
+          </div>
+          
+          <div class="col-sm-4 form-group">
+            <label for="e_group">Contact No.</label><span class="required">*</span>
+            <input type="text" class="form-control" name="contact_no" id="name-f" placeholder="Contact Number" value="{{funds.contact_no}}" required>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="cost_center">Address Line 1</label><span class="required">*</span>
+            <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" value="{{funds.address_line_one}}" required>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="cost_center">Address Line 2</label>
+            <input type="text" class="form-control" name="address_line_two" id="cost_center" placeholder="Address Line 2" value="{{funds.address_line_two}}" required>
+          </div>
+          <div class="col-sm-4 form-group">
+        <label for="bname">Landmark</label>
+        <input type="text" class="form-control" name="lendmark" id="name-l" placeholder="Landmark" value="{{funds.lendmark}}" required>
+      </div>
+        <div class="col-sm-4 form-group">
+        <label for="bname">City</label><span class="required">*</span>
+        <input type="text" class="form-control" name="city" id="name-l" placeholder="City" value="{{funds.city}}" required>
+      </div>
+
+         <div class="col-sm-4 form-group">
+        <label for="bname">State</label><span class="required">*</span>
+        <input type="text" class="form-control" name="state" id="name-l" placeholder="City" value="{{funds.state}}" required>
+      </div>
+  
+
+      <div class="col-sm-4 form-group">
+        <label for="created_on">Statement Date</label><span class="required">*</span>
+        <input type="Date" class="form-control" name="statement_date" id="PMDate" placeholder="Start Date" value="{{funds.statement_date}}" required>
+      </div>
+
+
+       
+       <div class="col-sm-4 form-group">
+        <label for="bname">Folio No </label><span class="required">*</span>
+        <input type="text" class="form-control" name="folio_no" id="name-l" placeholder="Folio No" value="{{funds.folio_no}}" required>
+      </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="bname">Company Name </label><span class="required">*</span>
+        <input type="text" class="form-control" name="company_name" id="name-l" placeholder="Folio No" value="{{funds.company_name}}" required>
+      </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="bname">Premium Amount </label><span class="required">*</span>
+        <input type="text" class="form-control" name="premium" id="name-l" placeholder="Folio No" value="{{funds.premium}}" required>
+      </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="bname">Start Date </label><span class="required">*</span>
+        <input type="date" class="form-control" name="created_on" id="name-l" placeholder="Folio No" value="{{funds.created_on}}" required>
+      </div>
+
+      
+      <div class="col-sm-4 form-group">
+        <label for="bname">Pay Frequency </label><span class="required">*</span>
+        <input type="text" class="form-control" name="pay_for" id="name-l" placeholder="Folio No" value="{{funds.pay_for}}" required>
+      </div>
+
+      <div class="col-sm-4 form-group">
+        <label for="bname">Due Date</label><span class="required">*</span>
+        <input type="date" class="form-control" name="renew_date" id="name-l" placeholder="Folio No" value="{{funds.renew_date}}" required>
+      </div>
+
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Bank_Name</label>
+      <input type="text" class="form-control" name="bank_name" id="cost_center" placeholder="Bank_Name" value="{{funds.bank_name}}" required>
+    </div> 
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">IFSC Code</label>
+      <input type="text" class="form-control" name="ifsc_code" id="cost_center" placeholder="IFSC Code" value="{{funds.ifsc_code}}" required>
+    </div> 
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Account_No</label>
+      <input type="text" class="form-control" name="account_no" id="cost_center" placeholder="Account_No" value="{{funds.account_no}}" required>
+    </div>  
+
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Name of the Unit holder</label>
+      <input type="text" class="form-control" name="name_holder" id="cost_center" placeholder="Name of the Unit holder" value="{{funds.name_holder}}" required>
+    </div>  
+
+    
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Tax Status</label>
+      <input type="text" class="form-control" name="tax_status" id="cost_center" placeholder="Name of the Unit holder" value="{{funds.tax_status}}" required>
+    </div>     
+
+
+    <div class="col-sm-4 form-group">
+     <label for="cost_center">Mode of Holding </label>
+      <input type="text" class="form-control" name="mode_of_holding" id="cost_center" placeholder="Name of the Unit holder" value="{{funds.mode_of_holding}}" required>
+    </div> 
+
+    <div class="col-sm-4 form-group">
+          <label for="status">status</label>
+          <select id="inputStatus" name="status" value="{{funds.status}}"  class="form-control browser-default custom-select">   
+      
+           {% if funds.status == 1 %}
+            <option value=1 selected="selected" >active</option>
+            {% else %}
+             <option value=1 >active</option>
+             {% endif %}
+               {% if funds.status == 0 %}
+            <option value=0 selected="selected" >deactive</option>
+            {% else %}
+             <option value=0>deactive</option>
+             {% endif %}
+            </select>
+        </div> 
+     
+
+
+      <div class="col-sm-12">
+        <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
+        </label>
+      </div>
+
+      <div class="col-sm-12 form-group mb-0">
+       <button class="btn btn-primary float-right">Submit</button>
+     </div>
+     
+   </div>
+ </form>
+</div> 
+</div>
+</div>
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+{% endblock content %}
+
+

@@ -18,3 +18,7 @@ class File_Upload(forms.ModelForm):
         fields = ['file_name','file']  	
 
 
+class LeadForm(forms.ModelForm):
+    class Meta:
+        model = Lead
+        fields = "__all__"

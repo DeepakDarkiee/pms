@@ -1,0 +1,116 @@
+{% extends 'dashboard/base4.html' %}
+
+{% block content %}
+
+<style>
+.form-control {
+color: black;   
+}  
+</style>
+
+{% block header %}
+{% endblock header %}
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">          
+        <h3 class="mb-0">Manage History</h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="/update-history/{{leads.id}}" method="POST">
+            {% csrf_token %}
+            
+            <div class="row jumbotron">
+
+               <div class="col-sm-4 form-group" >
+                <label for="name">Full Name :</label><span class="required">*</span>
+                <input type="text" class="form-control" name="full_name" id="name-f" placeholder="First Name" value="{{leads.full_name}}" readonly>
+              </div>
+
+      
+          
+              <div class="col-sm-4 form-group">
+                <label for="Dname">Follow Up Date </label>
+                <input type="Date" class="form-control" name="follow_up_date" id="name-l" placeholder="" value="{{ leads.follow_up_date }}" readonly>
+              </div>
+
+    	       <div class="col-sm-4 form-group">
+                <label for="renew_date">Follow Up Time</label>
+                <input type="text" name="follow_up_time" class="form-control" id="pan-no" placeholder="" value="{{leads.follow_up_time}}" readonly>
+              </div>
+
+
+              <div class="col-sm-12 form-group">
+              <label for="type_of_policy">Summary of Discussion</label>
+
+              <a style="border:none; color:#5e72e4;" type="button" href="#" data-toggle="modal" data-target="#exampleModal" class="fa fa-plus-circle"></a>
+
+              <textarea type="type" name="message" class="form-control" id="inputType" placeholder=""  readonly>{{ leads.message }}</textarea>
+              <br>
+              
+              {% for msg in discu %}
+
+               {{ msg.added_on }} 
+               
+               <textarea type="type" name="message" class="form-control" id="inputType" placeholder=""  readonly>{{ msg.msg }}</textarea>
+                <br>
+                
+                
+                {% endfor %}
+               </div> 
+          
+
+             <div class="col-sm-12 form-group mb-0">
+                <button class="btn btn-primary float-right">Update</button>
+              </div>    
+ 
+       </div>
+     </form>
+   </div> 
+</div>
+</div>
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Replay</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="myformcont" class="my-2" action="{% url 'discussion' %}" method="POST">
+          {% csrf_token %}
+          <!-- <h2 class="text-center">LIC Form</h2> -->
+        
+        <div class="col-sm-12 form-group" style="margin-top: -20px;">
+          <label for="name">Summary of Discussion :</label><span class="required">*</span>
+           <input type="text" class="form-control" name="id" id="name-f" placeholder="First Name" value="{{leads.id}}" readonly>
+            <textarea class="form-control" name="msg" id="name-f" placeholder="Message" required ></textarea>
+        </div>          
+        
+        <div class="col-sm-12 form-group mb-0">
+        <button class="btn btn-primary float-right">Submit</button>
+        </div>
+        
+        </form>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+{% endblock content %}
+
+

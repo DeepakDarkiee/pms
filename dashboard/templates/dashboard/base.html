@@ -12,6 +12,10 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
     crossorigin="anonymous">
 </script>
+
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -37,6 +41,12 @@
             }
             else if(period=='HalfYear'){
                 var result_date=new Date(start_date.getFullYear(), start_date.getMonth()+6, start_date.getDate());
+                result_date=moment(result_date).format('Y-MM-DD');
+                $('#NPMDate').val(result_date);
+            }
+            else if(period=='OneTime'){
+
+                var result_date="00-00-00";
                 result_date=moment(result_date).format('Y-MM-DD');
                 $('#NPMDate').val(result_date);
             }
@@ -78,9 +88,15 @@
               result_date=moment(result_date).format('Y-MM-DD');
               $('#NPMDate').val(result_date);
           }
+           else if(period=='OneTime'){
+                var result_date="00-00-00"
+                result_date=moment(result_date).format('Y-MM-DD');
+                $('#NPMDate').val(result_date);
+            }
       })
   });
 </script>
+
   <title>Policy Management System(DS)</title>
   
   <!-- Favicon - loaded as static -->
@@ -121,6 +137,18 @@
     color: red;
 }
 </style>
+
+<style>
+  
+.dropdown-menu {
+  padding-left: 14px;
+  box-shadow: none;
+   
+}
+
+</style>
+
+
 <body class="">
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
@@ -217,30 +245,125 @@
           </div>
         </form>
         <!-- Navigation -->
+        
         <ul class="navbar-nav">
           <li class="nav-item  class=" active="">
             <a class=" nav-link active " href="{% url 'index' %}"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
+    
           <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-credit-card text-green" ></i>Leads  &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'lead'  %}"><i class="ni ni-paper-diploma text-yellow" ></i>Add Lead</a>
+            <a class="dropdown-item" href="{% url 'manage-lead' %}"><i class="ni ni-map-big text-red" ></i>View Lead</a>
+            
+            </div>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-books text-purple" ></i>Policy  &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            
             <a class="nav-link " href="{% url 'add-policy'%}">
-              <i class="ni ni-book-bookmark text-red"></i>Policy Category
+              <i class="ni ni-ungroup text-blue"></i>Policy Type
             </a>
-          </li>
-          <li class="nav-item">
+
             <a class="nav-link " href="{% url 'add_record'%}">
-              <i class="ni ni-planet text-blue"></i>Add New-Policy
+              <i class="ni ni-planet text-blue"></i>Add Policy
             </a>
-          </li>
-          <li class="nav-item">
+
             <a class="nav-link " href="{% url 'show_record' %}">
-              <i class="ni ni-bullet-list-67 text-info"></i>Show-Policy
+              <i class="ni ni-bullet-list-67 text-info"></i>Show Policy
             </a>
+            
+            </div>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-paper-diploma text-info" ></i>Mutual Fund  &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            
+            <a class="nav-link " href="{% url 'add-mutual-fund' %}">
+              <i class="ni ni-compass-04 text-blue"></i>Add Mutual Fund
+            </a>
+
+            <a class="nav-link " href="{% url 'show-mutual-fund' %}">
+              <i class="ni ni-chart-pie-35 text-blue"></i>Show Mutual Fund
+            </a>
+
+            
+            </div>
+            </div>
           </li>
 
           <li class="nav-item">
+          <div class="dropdown">
+
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-collection text-orange" ></i>Insurance  &ensp;  <i class="fas fa-caret-down"></i></a> 
+                
+          <div class="dropdown-menu">
+
+          <a class="nav-link " href="#">
+              <i class="ni ni-circle-08 text-blue"></i>Health
+            </a>  
+
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="fas fa-motorcycle text-blue"></i>Vehical  &ensp;  <i class="fas fa-caret-down"></i></a> 
+
+           <div class="dropdown-menu" >
+
+
+          <a class="nav-link " href="#">
+              <i class="ni ni-circle-08 text-blue"></i>Car
+          </a>  
+            
+          </div>
+
+          </div>
+          </div>
+          </li>
+
+          <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="fa fa-industry text-blue" ></i>Govt Scheme &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            
+            <a class="nav-link " href="{% url 'add-policy'%}">
+              <i class="ni ni-ungroup text-blue"></i>nps
+            </a>
+            
+            </div>
+            </div>
+          </li>
+
+          
+          <li class="nav-item">
+            <a class="nav-link " href="#">
+              <i class="fa fa-calculator text-red"></i>Premium Calculator
+            </a>
+          </li>
+
+          
+        
+          <li class="nav-item">
             <a class="nav-link " href="{% url 'performance' %}">
-              <i class="ni ni-pin-3 text-orange"></i>Maps-Performance
+              <i class="ni ni-pin-3 text-orange"></i>Maps Performance
             </a>
           </li>
           <li class="nav-item">
@@ -302,7 +425,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-search"></i></span>
             </div>
-            <input class="form-control" name="q" placeholder="Search Record" type="text" >
+            <input class="form-control" name="q" placeholder="Search Policy" type="text" >
           </div>
         </div>
       </form>
@@ -362,7 +485,7 @@
         <!-- Card stats -->
 
         <div class="row">        
-          <div class="col-xl-3 col-lg-6">
+          <div class="col-xl-4 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
@@ -385,7 +508,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-6">
+          <div class="col-xl-4 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
@@ -406,7 +529,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-6">
+          <div class="col-xl-4 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
@@ -422,12 +545,13 @@
                 </div>
                 <p class="mt-3 mb-0 text-muted text-sm">
                   <span class="text-warning mr-2"></span>
-                  <span class="text-nowrap"> </span>
+		             <span class="text-nowrap">Overall Policy</span>
+
                 </p>
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-lg-6">
+          <!-- <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
@@ -447,7 +571,7 @@
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

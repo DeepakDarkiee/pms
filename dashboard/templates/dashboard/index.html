@@ -1,4 +1,4 @@
-{% extends 'dashboard/base.html' %}
+{% extends 'dashboard/base_dashboard.html' %}
 
 {% block content %}
 
@@ -17,101 +17,52 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col-md-12">
-              <marquee behavior="scroll" direction="up" scrollamount="2">
-                <h3 style="color: red" class="mb-0">Expire in 5 Days</h3>
-              </marquee>
-
-              <div class="col text-right" style="margin-top:-30px;">
-                <a href="{% url 'over_due' %}" class="btn btn-danger">({{overDueCount}})&nbsp; Over-Dues</a>
-
-              </div>
-              
-              <br>
-              
-              <div class="modal fade" id="Paymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <form action="{% url 'updateRenewDate' %}" method="POST">
-                      {% csrf_token %}  
-                    <div style="color: black" class="modal-body"><h2> The Policy is Renewed by Date <span id ="RenewDate"></span></h2></div>
-                   <div style='margin-left:20px'>
-                      
-                    <b> Policy No  &nbsp;&nbsp;:   </b> <input style='border:none;'type="text" id="#PolicyNo" name="PolicyNo" readonly ><br><br>
-                     <b> Renew Date  &nbsp;  :  </b>  <input  style='border:none;' type="text" id="#RenewDate" name="RenewDate" readonly ><br><br>
-    <b>Pay Frequency : </b><input  style='border:none;' type="text" id="#PayFrequency" name="PayFrequency" readonly>
-    </div>
-                    
-
-                    <div class="modal-footer">
-                      <button class="btn btn-sm btn-danger " type="button" data-dismiss="modal">Cancel</button>
-                      <button type='submit' class="btn btn-sm btn-success"  name='submit' value='Paid'>Pay</button>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h1 class="card-title">Policy Indicator</h1>
+ 
+                      <a href="#" class="btn btn-warning btn">(0) Under Dues</a>
+                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
                     </div>
-                    </form>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h1 class="card-title">Mutual Fund Indicator </h1>
+
+                      <a href="#" class="btn btn-warning btn">(0 Under Dues</a>
+                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                    <tr>
-                      <!-- <th scope="col">Client_Id</th> -->
-                      <!-- <th scope="col">Paid</th> -->
 
+              <div class="row" style="padding-top:3%">
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h1 class="card-title">Insurance Indicator</h1>
 
-                      <th scope="col">Client Name</>
-                      <th scope="col">Policy Type</th>
-                      <th scope="col">Phone Number</th>
-                      <th scope="col">Expire On</th>
-                      <th scope="col">Dues In Days</th>
-                      <th scope="col">Pay For</th>
-                      <th scope="col">Pay</th>
-                      <!-- <th scope="col">Policy_Number</th> -->
-                      <!-- <th scope="col">Year_OF_Policy</th> -->
-                      <!-- <th scope="col">Premium</th> -->
-                      <!-- <th scope="col">Status</th> -->
-                      <!-- <th scope="col">Actions</th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-
+                    <a href="#" class="btn btn-warning btn">(0) Under Dues</a>
+                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
                     
-                    {% for obj in weekDues %}
-                      
-                      <td>{{ obj.first_name }}</td>
-                      <td>
-                        {{ obj.policy_type }}
-                      </td>
-                      <td>
-                        {{ obj.contact }}
-                      </td>
-                      <td>
-                    
-                           {{ obj.renew_date }}
-                  
-                      
-
-
-                      </td>
-
-                     <td>      
-                       {% for key,value  in Due_in_days.items %} 
-                      
-                      {% if key == obj.id %}
-                      {{value}} day
-                                {% endif %}
-                                {% endfor %}
-                              </td>
-                              <td>{{obj.pay_for}}</td>
-                              <td><button type='submit'name='paid'  class='btn btn-sm btn-success'data-toggle="modal" data-target="#Paymodal" onclick="getpolicy(this,{{obj.policy_number}})" >Pay</button></td>
-
-                    </tr>
-
-                  
-                        
-                        {% endfor %}
-                  </tbody>
-                </table>
+                  </div>
+                </div>
               </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h1 class="card-title">Govt Scheme Indicator</h1>
+                    <a href="#" class="btn btn-warning btn">(0) Under Dues</a>
+                      <a href="#" class="btn btn-danger btn">(0) Over Dues</a>
+                  </div>
+                </div>
+              </div>
+            </div>              
+            <br>
             </div>
           </div>
         </div>

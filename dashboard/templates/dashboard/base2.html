@@ -5,6 +5,7 @@
 <!-- Static assets - Used to load the Favicon -->
 {% load static %}
 
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,6 +38,15 @@
     background: linear-gradient(87deg, #5e72e4 0, #825ee4  100%) !important;
   }
 
+</style>
+
+<style>
+  
+.dropdown-menu {
+  padding-left: 14px;
+  box-shadow: none;
+   
+}
 </style>
 
 {% if messages %}
@@ -138,21 +148,127 @@
             <a class=" nav-link active " href="{% url 'index' %}"> <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
           </li>
+
           <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-credit-card text-green" ></i>Leads  &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'lead'  %}"><i class="ni ni-paper-diploma text-yellow" ></i>Add Lead</a>
+            <a class="dropdown-item" href="{% url 'manage-lead' %}"><i class="ni ni-map-big text-red" ></i>View Lead</a>
+            
+            </div>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-books text-purple" ></i>Policy  &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            
             <a class="nav-link " href="{% url 'add-policy'%}">
-              <i class="ni ni-book-bookmark text-red"></i>Add Policy-Type
+              <i class="ni ni-ungroup text-blue"></i>Policy-Type
             </a>
-          </li>
-          <li class="nav-item">
+
             <a class="nav-link " href="{% url 'add_record'%}">
-              <i class="ni ni-planet text-blue"></i>Add New-Policy
+              <i class="ni ni-planet text-blue"></i>Add-Policy
             </a>
-          </li>
-          <li class="nav-item">
+
             <a class="nav-link " href="{% url 'show_record' %}">
               <i class="ni ni-bullet-list-67 text-info"></i>Show-Policy
             </a>
+            
+            </div>
+            </div>
           </li>
+
+         <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-paper-diploma text-info" ></i>Mutual Fund  &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            
+            <a class="nav-link " href="{% url 'add-mutual-fund' %}">
+              <i class="ni ni-compass-04 text-blue"></i>Add Mutual Fund
+            </a>
+
+            <a class="nav-link " href="{% url 'show-mutual-fund' %}">
+              <i class="ni ni-chart-pie-35 text-blue"></i>Show Mutual Fund
+            </a>
+
+            
+            </div>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="ni ni-book-bookmark text-blue" ></i>Mutual-Fund  &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            
+            <a class="nav-link " href="{% url 'add-policy'%}">
+              <i class="ni ni-ungroup text-blue"></i>Hdfc
+            </a>
+            
+            </div>
+            </div>
+          </li>
+
+          
+
+          <li class="nav-item">
+          <div class="dropdown">
+          <a class="nav-link " data-toggle="dropdown" href="#">
+           <i class="fa fa-industry text-info" ></i>Govt-Scheme &ensp;  <i class="fas fa-caret-down"></i></a>   
+                
+          <div class="dropdown-menu">
+            
+            <a class="nav-link " href="{% url 'add-policy'%}">
+              <i class="ni ni-ungroup text-blue"></i>nps
+            </a>
+            
+            </div>
+            </div>
+          </li>
+
+          
+          <li class="nav-item">
+            <a class="nav-link " href="#">
+              <i class="fa fa-tasks text-red"></i>Premium-Calculator
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link " href="#">
+              <i class="ni ni-book-bookmark text-yellow"></i>Add Plan
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="#">
+              <i class="fa fa-bars text-red" aria-hidden="true" ></i>Manage Plan
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="#">
+              <i class="fa fa-industry text-info" aria-hidden="true"></i>Add Company 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#">
+              <i class="ni ni-books text-purple"></i>Manage Company
+            </a>
+          </li> -->
+          
+        
           <li class="nav-item">
             <a class="nav-link " href="{% url 'performance' %}">
               <i class="ni ni-pin-3 text-orange"></i>Maps-Performance

@@ -1,13 +1,13 @@
 # base counter for total policy
-# import os
-# import django
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rest.settings')
-# os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
-# django.setup()
+import os
+import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rest.settings')
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+django.setup()
 
 def counter(request):
     # from django.contrib.auth.decorators import login_required
-    from dashboard.models import Lic,Drive
+    from dashboard.models import Lic,Drive,Mutual_Fund
     from account.models import register_table
     from django.contrib.auth.models import User
     from datetime import datetime, timedelta
@@ -17,45 +17,54 @@ def counter(request):
         
         
         
-        context = {}
-        data = register_table.objects.get(user__id=request.user.id)
-        context["data"] = data
+        # context = {}
+        # data = register_table.objects.get(user__id=request.user.id)
+        # context["data"] = data
 
         
         user = User.objects.get(username = request.user)
         lics = Lic.objects.filter(user__pk=user.id)
+        funds = Mutual_Fund.objects.filter(user__pk=user.id)
         dues= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).count()
-        # dues= Lic.objects.filter(user__pk=user.id,renew_date__in=timedelta(days=7),status=1).count()
+        #dues= Lic.objects.filter(user__pk=user.id,renew_date__in=timedelta(days=7),status=1).count()
+        fund_dues = Mutual_Fund.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).count()
+        
         active = Lic.objects.filter(user__pk=user.id,status=1).count()
+        active_fund = Mutual_Fund.objects.filter(user__pk=user.id,status=1).count()
         drive = Drive.objects.filter(user__pk=user.id).count()
-        print(drive)
+    
         count = lics.count()
+        count_fund = funds.count()
+        
+
         return {
+        
+        'fund_dues':fund_dues,
+        'active_fund':active_fund,
+        'count_fund':count_fund,
         'count':count,
         'active':active,
         'dues':dues,
-        'data': data,
+        # 'data': data,
         'drive':drive,
         }
     return {}
 
 
 
-# import asyncio
-# from pms.settings import MAIL
-# from dashboard.models import Lic,Drive
-# from django.contrib.auth.models import User
-# from datetime import datetime, timedelta
+import asyncio
+from pms.settings import MAIL
+from dashboard.models import Lic,Drive
+from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 
 
 
-# async def main():
-#     reminder5day= Lic.objects.filter(renew_date=datetime.now().date()+timedelta(days=5),status=1)     
-#     for i in reminder5day:
-#         if datetime.now().hour is 15:
-#             print(i.email)
-#             MAIL(i.email)
-    
+async def main():
+   reminder5day= Lic.objects.filter(renew_date=datetime.now().date()+timedelta(days=5),status=1)
+   for i in reminder5day:
+       if datetime.now().hour is 15:
+           print(i.email)
+           MAIL(i.email)
 
-# asyncio.run(main())
-    
+asyncio.run(main())

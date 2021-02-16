@@ -1,0 +1,180 @@
+{% extends 'dashboard/base4.html' %}
+
+{% block content %}
+
+<style>
+.form-control {
+color: black;   
+}  
+</style>
+
+{% block header %}
+{% endblock header %}
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">          
+        <h3 class="mb-0">Manage-Leads</h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="/update-lead/{{leads.id}}" method="POST">
+            {% csrf_token %}
+            
+            <div class="row jumbotron">
+
+               <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Full Name :</label><span class="required">*</span>
+                <input type="text" class="form-control" name="full_name" id="name-f" placeholder="First Name" value="{{leads.full_name}}" required>
+              </div>
+              <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Email :</label>
+                <input type="text" class="form-control" name="email" id="name-f" placeholder="" value="{{leads.email}}" required>
+              </div>
+             <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Contact Number :</label><span class="required">*</span>
+                <input type="number" class="form-control" name="contact_no" id="name-f" placeholder="" value="{{leads.contact_no}}" required>
+              </div>
+	     
+               <div class="col-sm-4 form-group">
+                <label for="Date">Company Name :</label>
+                <input type="text" name="companay_name" class="form-control" id="Date" placeholder="" value="{{leads.companay_name}}" required>
+              </div>
+          
+              
+              <div class="col-sm-4 form-group">
+                <label for="email">Address :</label>
+                <input type="text" class="form-control" name="address" id="name-l" placeholder="" value="{{ leads.address }}" required>
+              </div>
+
+
+              <div class="col-sm-4 form-group">
+                <label for="e_group">Area :</label>
+                <input type="text" class="form-control" name="area" id="name-f" placeholder="" value="{{ leads.area }}" required>
+              </div>
+                <div class="col-sm-4 form-group">
+            <label for="cost_center">City</label>
+            <input type="text" class="form-control" name="city" value="{{leads.city}}" id="cost_center" placeholder="" required>
+          </div>
+          
+          <div class="col-sm-4 form-group">
+            <label for="cost_center">State</label>
+            <input type="text" class="form-control" name="state" value="{{leads.state}}"  id="cost_center" placeholder="" required>
+          </div>
+
+
+
+
+        <div class="col-sm-4 form-group">
+        <label for="bname">Inquiry Date</label>
+        <input type="Date" class="form-control" name="inquiry_date" value="{{ leads.inquiry_date }}" id="Date" placeholder="" required>
+      </div>
+          <div class="col-sm-4 form-group">
+        <label for="bname">Inquiry Time</label>
+        <input type="text" class="form-control" name="inquiry_time" value="{{leads.inquiry_time}}" id="name-l" placeholder="" required>
+      </div>
+
+	      <!-- <div class="col-sm-4 form-group">
+	        <label for="bname">Lead Source</label>
+	        <input type="text" class="form-control" name="lead_source" value="{{leads.lead_source}}" id="name-l" placeholder="" required>
+	      </div> -->
+
+	      <div class="col-sm-4 form-group">
+            <label for="type_of_policy">Lead Source</label><span class="required">*</span>
+            <select id="period"  name="lead_source" value="{{leads.lead_source}}" class="form-control browser-default custom-select" required>
+
+            <!-- <option disabled>type of policy</option> -->
+            {% if leads.lead_source == 'News_Paper' %}
+            <option value=News_Paper selected="selected">News_Paper</option>
+            {% else %}
+            <option value=News_Pape >News_Pape</option>
+            {% endif %}
+            {% if leads.lead_source == 'Magazine' %}
+            <option value=Magazine selected="selected">Magazine</option>
+            {% else %}
+            <option value=Magazine >Magazine</option>
+            {% endif %}
+            {% if leads.lead_source == 'Advertising' %}
+            <option value=Advertising selected="selected">Advertising</option>
+            {% else %}
+            <option value=Advertising >Advertising</option>
+            {% endif %}
+            {% if leads.lead_source == 'Google' %}
+            <option value=Google selected="selected">Google</option>
+            {% else %}
+            <option value=Google >Google</option>
+            {% endif %}
+	        {% if leads.lead_source == 'Gmail' %}
+            <option value=Gmail selected="selected">Gmail</option>
+            {% else %}
+            <option value=Gmail >Gmail</option>
+            {% endif %}
+            {% if leads.lead_source == 'Friends_Reference' %}
+            <option value=Friends_Reference selected="selected">Friends_Reference</option>
+            {% else %}
+            <option value=Friends_Reference >Friends_Reference</option>
+            {% endif %}
+          </select>
+        </div>	
+
+          <div class="col-sm-4 form-group">
+            <label for="bname">Lead Allocated To</label>
+            <input type="text" class="form-control" name="lead_allocated_to" id="name-l" placeholder="" value="{{ leads.lead_allocated_to }}" required>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="Dname">Follow Up Date </label>
+            <input type="Date" class="form-control" name="follow_up_date" id="name-l" placeholder="" value="{{ leads.follow_up_date }}" required>
+          </div>
+	       <div class="col-sm-4 form-group">
+            <label for="renew_date">Follow Up Time</label>
+            <input type="text" name="follow_up_time" class="form-control" id="pan-no" placeholder="" value="{{leads.follow_up_time}}" required>
+          </div>
+
+        <!-- <div class="col-sm-4 form-group">
+        <label for="type_of_policy">Message</label>
+         <textarea type="type" name="message" class="form-control" id="inputType" placeholder=""  required>{{ leads.message }}
+          </textarea>
+
+         </div>   -->
+
+         <div class="col-sm-4 form-group">
+          <label for="status">status</label>
+          <select id="inputStatus" name="status" value="{{leads.status}}"  class="form-control browser-default custom-select">   
+      
+           {% if leads.status == 1 %}
+            <option value=1 selected="selected" >active</option>
+            {% else %}
+             <option value=1 >active</option>
+             {% endif %}
+               {% if leads.status == 0 %}
+            <option value=0 selected="selected" >deactive</option>
+            {% else %}
+             <option value=0>deactive</option>
+             {% endif %}
+            </select>
+        </div>
+
+        
+
+        
+         <div class="col-sm-12 form-group mb-0">
+            <button class="btn btn-primary float-right">Update</button>
+          </div>    
+ 
+       </div>
+     </form>
+   </div> 
+</div>
+</div>
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+

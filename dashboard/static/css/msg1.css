@@ -19,3 +19,14 @@
     margin-left: -40px;
   }  
 </style>
+
+
+<style>
+  
+.dropdown-menu {
+  top: 100%;
+  left: 20px;
+  box-shadow: none;
+  min-width: 16rem;  
+}
+</style>

@@ -1,0 +1,124 @@
+{% extends 'dashboard/base4.html' %}
+
+{% block content %}
+
+<style>
+.form-control {
+color: black;   
+}  
+</style>
+
+{% block header %}
+{% endblock header %}
+
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">          
+        <h3 class="mb-0">View-Leads</h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="/update_policy/{{lics.id}}" method="POST">
+            {% csrf_token %}
+            
+            <div class="row jumbotron">
+
+               <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Full Name :</label><span class="required">*</span>
+                <input type="text" class="form-control" name="first_name" id="name-f" placeholder="First Name." value="{{leads.full_name}}" readonly>
+              </div>
+              <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Email :</label>
+                <input type="text" class="form-control" name="middle_name" id="name-f" placeholder="Middle Name." value="{{leads.email}}" readonly>
+              </div>
+             <div class="col-sm-4 form-group" style="margin-top: -20px;">
+                <label for="name">Contact Number :</label><span class="required">*</span>
+                <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Last Name." value="{{leads.contact_no}}" readonly>
+              </div>
+	     
+               <div class="col-sm-4 form-group">
+                <label for="Date">Company Name :</label>
+                <input type="text" name="dob" class="form-control" id="Date" placeholder="" value="{{leads.companay_name}}" readonly>
+              </div>
+          
+              
+              <div class="col-sm-4 form-group">
+                <label for="email">Address :</label>
+                <input type="text" class="form-control" name="email" id="name-l" placeholder="Enter your Email" value="{{ leads.address }}" readonly>
+              </div>
+
+
+              <div class="col-sm-4 form-group">
+                <label for="e_group">Area :</label>
+                <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" value="{{ leads.area }}" readonly>
+              </div>
+                <div class="col-sm-4 form-group">
+            <label for="cost_center">City</label>
+            <input type="text" class="form-control" name="address_line_one" value="{{leads.city}}" id="cost_center" placeholder="Enter your address " readonly>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="cost_center">State</label>
+            <input type="text" class="form-control" name="address_line_two" value="{{leads.state}}"  id="cost_center" placeholder="Enter your address" readonly>
+          </div>
+          <div class="col-sm-4 form-group">
+        <label for="bname">Inquiry Date</label>
+        <input type="text" class="form-control" name="lendmark" value="{{ leads.inquiry_date }}" id="name-l" placeholder="Enter  Landmark" readonly>
+      </div>
+          <div class="col-sm-4 form-group">
+        <label for="bname">Inquiry Time</label>
+        <input type="text" class="form-control" name="city" value="{{leads.inquiry_time}}" id="name-l" placeholder="Enter City" readonly>
+      </div>
+      <div class="col-sm-4 form-group">
+        <label for="bname">Lead Source</label>
+        <input type="text" class="form-control" name="state" value="{{leads.lead_source}}" id="name-l" placeholder="Enter  State" readonly>
+      </div>
+          <div class="col-sm-4 form-group">
+            <label for="bname">Lead Allocated To</label>
+            <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" value="{{ leads.lead_allocated_to }}" readonly>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label for="Dname">Follow Up Date </label>
+            <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium Amount" value="{{leads.follow_up_date}}" readonly>
+          </div>
+	       <div class="col-sm-4 form-group">
+            <label for="renew_date">Follow Up Time</label>
+            <input type="text" name="created_on" class="form-control" id="pan-no" placeholder="Enter Start Date" value="{{leads.follow_up_time}}" readonly>
+          </div>
+
+
+
+          <div class="col-sm-4 form-group">
+            <label for="renew_date">status</label>
+            <input type="type" name="status" class="form-control" id="inputStatus" placeholder="" value="{{leads.get_status_display}}" readonly>  
+          </div>
+
+        <!-- <div class="col-sm-4 form-group">
+        <label for="type_of_policy">Message</label>
+         <textarea type="type" name="type" class="form-control" id="inputType" placeholder=""  readonly>{{ leads.message }}
+          </textarea>
+
+         </div>   -->
+
+
+
+         <div class="col-sm-12 form-group mb-0">
+           <a class="btn btn-sm btn-primary"  style="color:white; margin-left:90%"  href="{% url 'manage-lead' %}"><span class="glyphicon glyphicon-pencil" >Back</span></a>
+         </div>    
+ 
+       </div>
+     </form>
+   </div> 
+</div>
+</div>
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+</div>
+
+{% endblock content %}
+
+

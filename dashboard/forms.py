@@ -3,6 +3,7 @@ from.models import *
 from django.contrib.auth.models import User  
 #from Admin.models import Designations,Salary
 
+###################################################################################################################################################################
 
 class ContactForm(forms.Form):		
 	name=forms.CharField(required=True)
@@ -10,7 +11,7 @@ class ContactForm(forms.Form):
 	phone_number=forms.CharField(required=True)
 	message=forms.CharField()
 
-
+###################################################################################################################################################################
 
 class File_Upload(forms.ModelForm):  
     class Meta:  
@@ -18,7 +19,13 @@ class File_Upload(forms.ModelForm):
         fields = ['file_name','file']  	
 
 
+###################################################################################################################################################################
+
 class LeadForm(forms.ModelForm):
     class Meta:
         model = Lead
         fields = "__all__"
+
+
+
+###################################################################################################################################################################

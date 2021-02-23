@@ -14,7 +14,7 @@ from django.contrib import messages
 from .models import register_table
 from django.core.mail import EmailMessage
 
-
+#########################################################################################################################################
 
 
 
@@ -49,7 +49,7 @@ def register(request):
     return render(request,"account/sign_up.html")
 
 
-	
+#########################################################################################################################################    
 
 def check_user(request):
     if request.method=="GET":
@@ -59,6 +59,9 @@ def check_user(request):
             return HttpResponse("Exists")
         else:
             return HttpResponse("Not Exists")
+
+
+#########################################################################################################################################
 
 
 @login_required
@@ -71,6 +74,7 @@ def user_logout(request):
     return res
 
 
+#########################################################################################################################################
 
 def user_login(request):
     if request.method=="POST":
@@ -94,6 +98,9 @@ def user_login(request):
             return render(request,"account/login.html")
 
     return render(request,"account/login.html")
+
+
+#########################################################################################################################################
 
 
 
@@ -139,6 +146,10 @@ def edit_profile(request):
     return render(request,"account/edit_profile.html",context)
 
 
+#########################################################################################################################################
+
+
+
 def change_password(request):
     context={}
     ch = register_table.objects.filter(user__id=request.user.id)
@@ -167,6 +178,8 @@ def change_password(request):
 
     return render(request,"account/change_password.html",context)
 
+#########################################################################################################################################
+
 
 # def forgotpass(request):
 #     context = {}
@@ -187,7 +200,7 @@ def change_password(request):
 
 #     return render(request,"account/forgot_pass.html",context)
 
-
+#########################################################################################################################################
 
 # import random
 
@@ -205,3 +218,6 @@ def change_password(request):
 #             return JsonResponse({"status":"error","email":user.email})
 #     except:
 #         return JsonResponse({"status":"failed"})    
+
+
+#########################################################################################################################################

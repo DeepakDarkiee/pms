@@ -9,6 +9,7 @@
   }
 </style>
 
+
 <div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
@@ -147,16 +148,31 @@ document.getElementById("RenewDate").innerHTML=result_date;
               var result_date=new Date(start_date.getFullYear(), start_date.getMonth()+1, start_date.getDate());
             console.log(result_date);
               result_date=moment(result_date).format('Y-MM-DD');
+              document.getElementById("#PolicyNo").value=policy_no;
+document.getElementById("#RenewDate").value=result_date;
+document.getElementById("#PayFrequency").value=period;
+document.getElementById("RenewDate").innerHTML=result_date;
+        
         
           }
           else if(period=='Quarterly'){
               var result_date=new Date(start_date.getFullYear(), start_date.getMonth()+3, start_date.getDate());
               result_date=moment(result_date).format('Y-MM-DD');
+              document.getElementById("#PolicyNo").value=policy_no;
+document.getElementById("#RenewDate").value=result_date;
+document.getElementById("#PayFrequency").value=period;
+document.getElementById("RenewDate").innerHTML=result_date;
+        
               
           }
           else if(period=='HalfYear'){
               var result_date=new Date(start_date.getFullYear(), start_date.getMonth()+6, start_date.getDate());
               result_date=moment(result_date).format('Y-MM-DD');
+              document.getElementById("#PolicyNo").value=policy_no;
+document.getElementById("#RenewDate").value=result_date;
+document.getElementById("#PayFrequency").value=period;
+document.getElementById("RenewDate").innerHTML=result_date;
+        
             
           }
    }

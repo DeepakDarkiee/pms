@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 import datetime
 
 
+#########################################################################################################################################
+
 class register_table(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     contact_number = models.IntegerField()
@@ -20,3 +22,7 @@ class register_table(models.Model):
 
     class Meta:
         db_table="register_table"    
+
+
+
+#########################################################################################################################################        

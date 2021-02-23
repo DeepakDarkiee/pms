@@ -1,9 +1,12 @@
-
 from django.db import models
 from django.contrib.auth.models import User
 from time import sleep
 import datetime
 from datetime import datetime
+
+
+###################################################################################################################################################################
+
 
 
 STATUS=((0,'Deactive'),(1,'Active'))
@@ -12,7 +15,11 @@ STATUS=((0,'Deactive'),(1,'Active'))
 # (1,"jivan_bima"),
 # (2,"jivan_laabh"),
 
-#     )
+#)
+
+
+###################################################################################################################################################################
+
 
 PAY_FOR=(
 ("Annually","Annually"),
@@ -21,8 +28,10 @@ PAY_FOR=(
 ("HalfYear","HalfYear"),
 ("OneTime","OneTime")
 
-
 )
+
+
+###################################################################################################################################################################
 
 
 
@@ -58,6 +67,9 @@ STATE=(
 
 )
 
+###################################################################################################################################################################
+
+
 
 
 COMPANY_NAME=(
@@ -83,11 +95,17 @@ COMPANY_NAME=(
 )
 
 
+###################################################################################################################################################################
+
+
 TAX_STATUS=(
 ("Yes","Yes"),
 ("No","No"),
 
 )
+
+
+###################################################################################################################################################################
 
 
 
@@ -98,6 +116,8 @@ MODE_OF_HOLDING=(
 )
 
 
+###################################################################################################################################################################
+
 
 LEAD=(
 ("News_Paper","News_Paper"),
@@ -107,8 +127,11 @@ LEAD=(
 ("Gmail","Gmail"),
 ("Friends_Reference","Friends_Reference")
 
-
 )
+
+
+###################################################################################################################################################################
+
 
 
 class PolicyType(models.Model):
@@ -120,6 +143,8 @@ class PolicyType(models.Model):
         return self.policy_type
 
 
+
+###################################################################################################################################################################
 
 
 class Lic(models.Model):    
@@ -145,12 +170,16 @@ class Lic(models.Model):
     last_payment_date=models.CharField(max_length=50)
     renew_date=models.CharField(max_length=20)
     status=models.IntegerField(choices=STATUS,default=1)
+    commission=models.IntegerField()
+    commission_date=models.CharField(max_length=50)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     
     def __str__(self):
     	return self.first_name
 
     
+
+###################################################################################################################################################################
 
        
 class Drive(models.Model):
@@ -165,7 +194,7 @@ class Drive(models.Model):
         return self.file_name
 
 
-
+###################################################################################################################################################################
 
    
 
@@ -193,6 +222,8 @@ class Lead(models.Model):
         return self.full_name
 
 
+###################################################################################################################################################################
+
 
 
 class Discuss(models.Model):
@@ -204,6 +235,8 @@ class Discuss(models.Model):
     def __str__(self):
         return self.msg   
        
+
+###################################################################################################################################################################
 
 
 class Mutual_Fund(models.Model):
@@ -230,9 +263,14 @@ class Mutual_Fund(models.Model):
     name_holder = models.CharField(max_length=30)
     tax_status = models.CharField(choices=TAX_STATUS,null=False,max_length=50)
     mode_of_holding= models.CharField(choices=MODE_OF_HOLDING,null=False,max_length=50)
+    commission=models.IntegerField()
+    commission_date=models.CharField(max_length=50)
     status=models.IntegerField(choices=STATUS,default=1)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.first_name   
     
+
+
+###################################################################################################################################################################    

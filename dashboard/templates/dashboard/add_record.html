@@ -7,8 +7,7 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header bg-transparent">
-          <h3 class="mb-0">Add Customer Policy
-</h3>
+          <h3 class="mb-0">Add Customer Policy</h3>
         </div>
         <div class="card-body">
          <div class="container">
@@ -42,13 +41,14 @@
           
           <div class="col-sm-4 form-group">
             <label for="e_group">Contact No.</label><span class="required">*</span>
-            <input type="text" class="form-control" name="contact" id="name-f" placeholder="Contact Number" required>
+            <input type="number" class="form-control" name="contact" id="name-f" placeholder="Contact Number" required>
           </div>
-          <div class="col-sm-12 form-group">
+
+          <div class="col-sm-6 form-group">
             <label for="cost_center">Address Line 1</label><span class="required">*</span>
             <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" required>
           </div>
-          <div class="col-sm-12 form-group">
+          <div class="col-sm-6 form-group">
             <label for="cost_center">Address Line 2</label>
             <input type="text" class="form-control" name="address_line_two" id="cost_center" placeholder="Address Line 2" >
           </div>
@@ -99,21 +99,21 @@
     </div>
 
           
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="bname">Policy Number (must be unique)</label><span class="required">*</span>
         <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Policy Number" required>
       </div>
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="Dname">Premium Amount</label><span class="required">*</span>
         <input type="text" class="form-control" name="premium" id="name-l" placeholder="Premium Amount" required>
       </div>
 
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="created_on">Start Date</label><span class="required">*</span>
         <input type="Date" class="form-control" name="created_on" id="PMDate" placeholder="Start Date" required>
       </div>
 
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="type_of_policy">Pay Frequency</label><span class="required">*</span>
         <select id="period"  name="pay_for" class="form-control browser-default custom-select" required/>
         <!-- <option disabled>type of policy</option> -->
@@ -126,34 +126,34 @@
       </select>
     </div>
     
-    <div class="col-sm-6 form-group">
+    <div class="col-sm-4 form-group">
       <label for="renew_date">Due Date </label>
       <input type="date" name="renew_date" data-date-format="DD-MM-YYYY" class="form-control datetimepicker"  id="NPMDate" placeholder="Enter renew date" required readonly>
       
     </div>
     
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="Payslip">Sum Assured</label><span class="required">*</span>
         <input type="text" class="form-control" name="sum_assured" id="address-1" placeholder="Sum Assured" required>
       </div>
       
       
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="cc description">Premium Paying Term</label><span class="required">*</span>
         <input type="text" class="form-control" name="year_of_policy" id="description" placeholder="Premium Paying Term" required>
       </div>
 
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="cc description">Last Payment Date</label><span class="required">*</span>
         <input type="Date" class="form-control" name="last_payment_date" id="description" placeholder="Last Payment Date" required>
       </div>
 
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="pan_no"> Beneficiary Name</label>
         <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Beneficiary Name" >
       </div>
       
-      <div class="col-sm-6 form-group">
+      <div class="col-sm-4 form-group">
         <label for="type_of_policy">Policy Type</label>
 
         <a style="border:none; color:#5e72e4;" type="button" href="{% url 'add-policy' %}"  class="fa fa-plus-circle"></a>
@@ -166,6 +166,16 @@
         {% endfor %}
         
       </select>
+    </div>
+
+    <div class="col-sm-4 form-group">
+      <label for="e_group">Commission</label><span class="required">*</span>
+      <input type="number" class="form-control" name="commission" id="name-f" placeholder="Commission" required>
+    </div>
+
+    <div class="col-sm-4 form-group">
+      <label for="e_group">Commission Date</label><span class="required">*</span>
+      <input type="date" class="form-control" name="commission_date" id="name-f" placeholder="Commission Date" required>
     </div>
 
       <div class="col-sm-12">

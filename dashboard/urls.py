@@ -8,10 +8,12 @@ from django.views.static import serve
 
 
 
+
 urlpatterns = [
     
     path('index/',views.index, name='index'),
-
+ 
+################################################################
 
     path('add-mutual-fund/', views.add_mutual_fund,name='add-mutual-fund'),
     path('show-mutual-fund/', views.show_mutual_fund,name='show-mutual-fund'),
@@ -24,7 +26,7 @@ urlpatterns = [
     path('search-mutual-fund/',views.SearchFundView.as_view(),name='search-mutual-fund'),
     path('fund-over-due/', views.fund_over_due,name='fund-over-due'), 
 
-
+##################################################################
 
     path('lead/', views.add_lead,name='lead'),
     path('manage-lead/',views.manage_lead,name='manage-lead'),
@@ -39,27 +41,37 @@ urlpatterns = [
     path('search-lead/',views.SearchLeadView.as_view(),name='search-lead'),
     path('discussion/', views.discussion, name='discussion'),
 
-
+########################################################################                        
 
     path('add_record/', views.add_record, name='add_record'),
     path('show_record/', views.show_record, name='show_record'),
     path('edit_policy/<int:id>', views.edit_policy,name='edit_policy'),
     path('update_policy/<int:id>', views.update_policy,name='update_policy'),
     path('delete_policy/<int:id>', views.delete_policy,name='delete_policy'),
-    path('view_policy/<int:id>', views.view_policy,name='view_policy'),
-    path('performance/', views.performance, name='performance'),           
+    path('view_policy/<int:id>', views.view_policy,name='view_policy'),         
     path('search_record/', views.SearchResultsView.as_view(),name='search_record'),
     path('sort_record/', views.sort_record, name='sort_record'),    
     path('export/', export_data, name="export_data"),
     path('import/', import_data, name="import_data"),    
-    path('my-drive/', views.my_drive, name='my-drive'),
-    path('add-policy/', views.add_policy, name='add-policy'),
-    path('delete_drive/<int:id>', views.delete_drive,name='delete_drive'), 
     path('updateRenewDate/', views.updateRenewDate,name='updateRenewDate'), 
     path('updateRenewDateOverDue/', views.updateRenewDateOverDue,name='updateRenewDateOverDue'), 
     path('over_due/', views.over_due,name='over_due'), 
+   
+##########################################################################################################
+
+    path('commission/', views.commission, name='commission'),
+    path('performance/', views.performance, name='performance'),
+    path('add-policy/', views.add_policy, name='add-policy'),
+
+
+#################################################################################################################
+
+
+    path('my-drive/', views.my_drive, name='my-drive'),
+    path('delete_drive/<int:id>', views.delete_drive,name='delete_drive'),
     url(r'^download/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
    
     
-    
+################################################################################################################################
+
 ]

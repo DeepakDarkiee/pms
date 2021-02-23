@@ -54,11 +54,11 @@ color: black;
                 <label for="e_group">Contact No.</label>
                 <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" value="{{ lics.contact }}" readonly>
               </div>
-                <div class="col-sm-12 form-group">
+                <div class="col-sm-6 form-group">
             <label for="cost_center">Address Line 1</label>
             <input type="text" class="form-control" name="address_line_one" value="{{lics.address_line_one}}" id="cost_center" placeholder="Enter your address " readonly>
           </div>
-          <div class="col-sm-12 form-group">
+          <div class="col-sm-6 form-group">
             <label for="cost_center">Address Line 2</label>
             <input type="text" class="form-control" name="address_line_two" value="{{lics.address_line_two}}"  id="cost_center" placeholder="Enter your address" readonly>
           </div>
@@ -74,63 +74,74 @@ color: black;
         <label for="bname">State</label>
         <input type="text" class="form-control" name="state" value="{{lics.state}}" id="name-l" placeholder="Enter  State" readonly>
       </div>
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-4 form-group">
             <label for="bname">Policy Number</label>
             <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" value="{{ lics.policy_number }}" readonly>
           </div>
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-4 form-group">
             <label for="Dname">Premium Amount </label>
             <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium Amount" value="{{ lics.premium }}" readonly>
           </div>
-	   <div class="col-sm-6 form-group">
+	   <div class="col-sm-4 form-group">
             <label for="renew_date">Start Date</label>
             <input type="text" name="created_on" class="form-control" id="pan-no" placeholder="Enter Start Date" value="{{lics.created_on}}" readonly>
           </div>
 
-           <div class="col-sm-6 form-group">
+           <div class="col-sm-4 form-group">
         <label for="type_of_policy">Pay Frequency</label>
          <input type="type" name="type" class="form-control" id="inputType" placeholder="" value="{{lics.pay_for}}" readonly>
          </div>
 	
-	   <div class="col-sm-6 form-group">
+	   <div class="col-sm-4 form-group">
             <label for="renew_date">Due Date</label>
             <input type="Date" name="renew_date" class="form-control" id="Date" placeholder="Enter Due date" value="{{lics.renew_date}}" readonly>
           </div>
 
 
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-4 form-group">
             <label for="Payslip">Sum Assured</label>
             <input type="text" class="form-control" name="sum_assured" id="address-1" placeholder="enter sum assured" value="{{ lics.sum_assured }}" readonly>
           </div>
           
           
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-4 form-group">
             <label for="cc description">Premium Paying term</label>
             <input type="text" class="form-control" name="year_of_policy" id="description" placeholder="Enter year of policy" value="{{ lics.year_of_policy }}" readonly>
           </div>
 
-	   <div class="col-sm-6 form-group">
+	   <div class="col-sm-4 form-group">
             <label for="cc description">Last Payment Date</label>
             <input type="text" class="form-control" name="last_payment_date" id="description" placeholder="Enter year of policy" value="{{ lics.last_payment_date }}" readonly>
           </div>
 
 
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-4 form-group">
             <label for="pan_no"> Beneficiary Name</label>
             <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Enter beneficiary name" value="{{ lics.beneficiary_name }}" readonly>
           </div>
+          
           <!-- <div class="col-sm-6 form-group">
             <label for="created_on">Created On</label>
             <input type="text" class="form-control" name="created_on" id="pan-no" placeholder="{{lics.created_on|date:'Y-m-d'}}" readonly> 
           </div> -->
 
           
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-4 form-group">
             <label for="renew_date">Policy Type</label>
             <input type="type" name="type" class="form-control" id="inputType" placeholder="" value="{{lics.policy_type}}" readonly>  
           </div>
 
-          <div class="col-sm-6 form-group">
+          <div class="col-sm-4 form-group">
+            <label for="e_group">Commission</label><span class="required">*</span>
+            <input type="number" class="form-control" name="commission" id="name-f" placeholder="" value="{{lics.commission}}" readonly>  
+          </div>
+
+          <div class="col-sm-4 form-group">
+            <label for="e_group">Commission Date</label><span class="required">*</span>
+            <input type="date" class="form-control" name="commission_date" id="name-f" placeholder="" value="{{lics.commission_date}}" readonly> 
+          </div>
+
+          <div class="col-sm-4 form-group">
             <label for="renew_date">status</label>
             <input type="type" name="status" class="form-control" id="inputStatus" placeholder="" value="{{lics.get_status_display}}" readonly>  
           </div>

@@ -5,12 +5,18 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rest.settings')
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 django.setup()
 
+
+###################################################################################################################################################################
+
+
+
 def counter(request):
     # from django.contrib.auth.decorators import login_required
     from dashboard.models import Lic,Drive,Mutual_Fund
     from account.models import register_table
     from django.contrib.auth.models import User
     from datetime import datetime, timedelta
+    from datetime import date 
     
     # @login_required
     if(request.user.id):
@@ -21,21 +27,45 @@ def counter(request):
         # data = register_table.objects.get(user__id=request.user.id)
         # context["data"] = data
 
-        
+        todays_date = date.today() 
         user = User.objects.get(username = request.user)
+      
         lics = Lic.objects.filter(user__pk=user.id)
-        funds = Mutual_Fund.objects.filter(user__pk=user.id)
         dues= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).count()
-        #dues= Lic.objects.filter(user__pk=user.id,renew_date__in=timedelta(days=7),status=1).count()
-        fund_dues = Mutual_Fund.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).count()
-        
         active = Lic.objects.filter(user__pk=user.id,status=1).count()
-        active_fund = Mutual_Fund.objects.filter(user__pk=user.id,status=1).count()
-        drive = Drive.objects.filter(user__pk=user.id).count()
-    
         count = lics.count()
+
+
+        commissions = Lic.objects.filter(user__pk=user.id)
+        if commissions.exists():
+            commission_list =list()
+            for commission in commissions:
+                com=commission.commission
+                commission_list.append(com)
+            total_com=sum(commission_list)
+        else:
+            total_com=0
+
+                
+        
+        funds = Mutual_Fund.objects.filter(user__pk=user.id)
+        fund_dues = Mutual_Fund.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).count()
+        active_fund = Mutual_Fund.objects.filter(user__pk=user.id,status=1).count()
         count_fund = funds.count()
         
+
+        fund_commission = Mutual_Fund.objects.filter(user__pk=user.id)
+        if fund_commission.exists():
+            commission_list = list()
+            for commission in fund_commission:
+                com =commission.commission
+                commission_list.append(com)
+            total_fund_com = sum(commission_list)
+        else:
+            total_fund_com=0
+                
+
+
 
         return {
         
@@ -45,10 +75,19 @@ def counter(request):
         'count':count,
         'active':active,
         'dues':dues,
-        # 'data': data,
-        'drive':drive,
+        'total_com':total_com,
+        'total_fund_com':total_fund_com,
+        # 'overall_commission': overall_commission,
+        'todays_date':todays_date,
+        #'data':data,
+        
         }
     return {}
+
+
+
+###################################################################################################################################################################
+
 
 
 
@@ -68,3 +107,7 @@ async def main():
            MAIL(i.email)
 
 asyncio.run(main())
+
+
+
+###################################################################################################################################################################

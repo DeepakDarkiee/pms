@@ -141,6 +141,16 @@ color: black;
     </div> 
 
     <div class="col-sm-4 form-group">
+     <label for="e_group">Commission</label><span class="required">*</span>
+     <input type="number" class="form-control" name="commission" id="name-f" placeholder="" value="{{funds.commission}}" readonly>  
+    </div>
+
+   <div class="col-sm-4 form-group">
+    <label for="e_group">Commission Date</label><span class="required">*</span>
+    <input type="date" class="form-control" name="commission_date" id="name-f" placeholder="" value="{{funds.commission_date}}" readonly> 
+  </div>
+
+    <div class="col-sm-4 form-group">
      <label for="cost_center">Status</label>
       <input type="text" class="form-control" name="name_holder" id="cost_center" placeholder="Name of the Unit holder" value="{{funds.get_status_display}}" readonly>
     </div> 

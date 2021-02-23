@@ -4,7 +4,7 @@ from pms import urls as pms_urls
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 
-
+#########################################################################################################################################
 
 urlpatterns = [
 
@@ -16,6 +16,10 @@ urlpatterns = [
 	path("change_password/",views.change_password,name="change_password"),
 	#path("forgotpass",views.forgotpass, name="forgotpass"),
     #path("reset_password",views.reset_password,name="reset_password"),
+
+
+#########################################################################################################################################
+
    	
    	path('password-reset/',
          auth_views.PasswordResetView.as_view(
@@ -49,3 +53,4 @@ urlpatterns = [
 ]
 
 
+#########################################################################################################################################

@@ -169,6 +169,16 @@ color: black;
     </div> 
 
     <div class="col-sm-4 form-group">
+      <label for="e_group">Commission</label><span class="required">*</span>
+      <input type="number" class="form-control" name="commission" id="name-f" placeholder="" value="{{funds.commission}}" required>
+    </div>
+
+    <div class="col-sm-4 form-group">
+    <label for="e_group">Commission Date</label><span class="required">*</span>
+    <input type="date" class="form-control" name="commission_date" id="name-f" placeholder="" value="{{funds.commission_date}}" required>
+    </div>
+
+    <div class="col-sm-4 form-group">
           <label for="status">status</label>
           <select id="inputStatus" name="status" value="{{funds.status}}"  class="form-control browser-default custom-select">   
       

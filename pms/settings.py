@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'crispy_forms',
     'import_export',
-    'reports'
+    'reports',
+    'homeblog.apps.HomeblogConfig'
 ]
 
 

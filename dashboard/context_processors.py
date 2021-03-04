@@ -63,9 +63,9 @@ def counter(request):
             total_fund_com = sum(commission_list)
         else:
             total_fund_com=0
+
+        overall_commission = total_fund_com + total_com
                 
-
-
 
         return {
         
@@ -77,7 +77,7 @@ def counter(request):
         'dues':dues,
         'total_com':total_com,
         'total_fund_com':total_fund_com,
-        # 'overall_commission': overall_commission,
+        'overall_commission': overall_commission,
         'todays_date':todays_date,
         #'data':data,
         

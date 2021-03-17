@@ -35,7 +35,9 @@ color: black;
               </div>
              <div class="col-sm-4 form-group" style="margin-top: -20px;">
                 <label for="name">Contact Number :</label><span class="required">*</span>
-                <input type="number" class="form-control" name="contact_no" id="name-f" placeholder="" value="{{leads.contact_no}}" required>
+                <input type="number" class="form-control" name="contact_no" id="name-f" placeholder="" value="{{leads.contact_no}}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              type = "number"
+              maxlength = "12" required>
               </div>
 	     
                <div class="col-sm-4 form-group">

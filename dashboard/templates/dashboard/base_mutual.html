@@ -13,10 +13,8 @@
     crossorigin="anonymous">
 </script>
 
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('#period').change(function(){
@@ -122,6 +120,7 @@
   <!-- CSS Files -->
   <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link rel="stylesheet" href="/static/css/msg1.css" />
+  <link rel="stylesheet" href="/static/css/number.css"/>
 
 </head>
 {% if messages %}
@@ -314,7 +313,7 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
           <div class="dropdown">
 
           <a class="nav-link " data-toggle="dropdown" href="#">
@@ -340,9 +339,9 @@
 
           </div>
           </div>
-          </li>
+          </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
           <div class="dropdown">
           <a class="nav-link " data-toggle="dropdown" href="#">
            <i class="fa fa-industry text-blue" ></i>Govt Scheme &ensp;  <i class="fas fa-caret-down"></i></a>   
@@ -355,11 +354,22 @@
             
             </div>
             </div>
+          </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'insurance'  %}">
+              <i class="ni ni-collection text-orange"></i>Insurance
+            </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'govt-scheme'  %}">
+              <i class="fa fa-industry text-blue"></i>Govt Scheme
+            </a>
+          </li>
           
           <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link " href="{% url 'premium-calculator'  %}">
               <i class="fa fa-calculator text-red"></i>Premium Calculator
             </a>
           </li>

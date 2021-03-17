@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col">
@@ -19,7 +20,7 @@
 
           <div class="col-sm-4 form-group" >
             <label for="name">Full Name :</label><span class="required">*</span>
-            <input type="text" class="form-control" name="full_name" id="name-f" placeholder="Full Name" required>
+            <input type="text" class="form-control" name="full_name" id="name-f" placeholder="Full Name" required style="text-transform: capitalize;">
           </div>      
 
           <div class="col-sm-4 form-group" >
@@ -30,7 +31,9 @@
 
           <div class="col-sm-4 form-group" >
             <label for="name">Contact No :</label><span class="required">*</span>
-            <input type="number" class="form-control" name="contact_no" id="name-f" placeholder="Contact No" required>
+            <input type="number"  class="form-control" name="contact_no"  id="name-f" placeholder="Contact No" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              type = "number"
+              maxlength = "12"  required>
           </div>
 
           <div class="col-sm-4 form-group" >

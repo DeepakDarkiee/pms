@@ -48,7 +48,7 @@ def index(request):
     lics = Lic.objects.filter(user__pk=user.id)
     userMail=request.user.get_username()
 
-    duesInWeekPolicy= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=5)],status=1).order_by('renew_date')
+    duesInWeekPolicy= Lic.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).order_by('renew_date')
     Overdues= Lic.objects.filter(user__pk=user.id,renew_date__lt=datetime.now().date(),status=1).order_by('renew_date')
     overDueCount= Overdues.count()    
     current_date=date.today()
@@ -65,14 +65,55 @@ def index(request):
 
         })
 
+    user = User.objects.get(username = request.user)
+    funds = Mutual_Fund.objects.filter(user__pk=user.id)
+    userMail=request.user.get_username()
+
+
+    duesInWeekfund= Mutual_Fund.objects.filter(user__pk=user.id,renew_date__range=[datetime.now().date(),datetime.now().date()+timedelta(days=7)],status=1).order_by('renew_date')
+    FundOverdues= Mutual_Fund.objects.filter(user__pk=user.id,renew_date__lt=datetime.now().date(),status=1).order_by('renew_date')
+    fundoverDueCount= FundOverdues.count()    
+    current_date=date.today()
+
+
+    Due_in_days={}
+    for obj in duesInWeekfund:
+    
+        Due_in_days[obj.id]=datetime.strptime(obj.renew_date,'%Y-%m-%d').day-current_date.day
+    return render(request,'dashboard/index.html',{
+    
+        'duesInWeekfund':duesInWeekfund,
+        'Due_in_days':Due_in_days,
+        'fundoverDueCount':fundoverDueCount,
+
+        })
 
 ########################################################################################################
 
 
 
 @login_required
-def commission(request):
+def commission(request):        
     return render(request,'dashboard/commission.html')
+
+
+
+
+@login_required
+def insurance(request):
+    return HttpResponse("<marquee><h1>page under construction </h1></marquee")
+    
+    
+@login_required
+def govt_scheme(request):
+    return HttpResponse("<marquee><h1>page under construction </h1></marquee")
+    
+    
+@login_required
+def premium_calculator(request):
+    return HttpResponse("<marquee><h1>page under construction </h1></marquee")    
+    
+
 
 
 
@@ -108,10 +149,17 @@ def add_mutual_fund(request):
         mode_of_holding= request.POST.get('mode_of_holding')
         commission=request.POST.get('commission')
         commission_date=request.POST.get('commission_date')
+
+        family_name = request.POST.get('family_name')
+        family_dob = request.POST.get('family_dob')
+        relation_type = request.POST.get('relation_type')
+        gender = request.POST.get('gender') 
+
         obj=Mutual_Fund(first_name=first_name,last_name=last_name,dob=dob,email=email,contact_no=contact_no,
             address_line_one=address_line_one,pay_for=pay_for,created_on=created_on,address_line_two=address_line_two,lendmark=lendmark,city=city,
             state=state,statement_date=statement_date,premium=premium,folio_no=folio_no,company_name=company_name,name_holder=name_holder,
-            tax_status=tax_status,commission=commission,commission_date=commission_date,renew_date=renew_date,account_no=account_no,ifsc_code=ifsc_code,mode_of_holding=mode_of_holding,bank_name=bank_name,user=user)
+            tax_status=tax_status,commission=commission,commission_date=commission_date,renew_date=renew_date,account_no=account_no,ifsc_code=ifsc_code,mode_of_holding=mode_of_holding,bank_name=bank_name,
+            family_name=family_name,family_dob=family_dob,relation_type=relation_type,gender=gender,user=user)
         obj.save()
 
         messages.success(request,'successfully Save')
@@ -501,10 +549,26 @@ def add_record(request):
         renew_date=request.POST.get('renew_date')
         commission=request.POST.get('commission')
         commission_date=request.POST.get('commission_date')
+
+
+        family_name = request.POST.getlist(('family_names[]'))
+        print(family_name)
+        family_name=','.join(family_name)
+
+        family_dob = request.POST.getlist(('family_dob[]'))
+        family_dob=','.join(family_dob)
+
+        relation_type = request.POST.getlist(('relation_type[]'))
+        relation_type=','.join(relation_type)
+
+        gender = request.POST.getlist(('gender[]'))
+        gender=','.join(gender)
+
         policy_type=PolicyType.objects.get(policy_type=request.POST.get('type'))
         last_payment_date=request.POST.get('last_payment_date')
+        
         obj=Lic(email=email,first_name=first_name,last_name=last_name,middle_name=middle_name, address_line_one=address_line_one,address_line_two=address_line_two,lendmark=lendmark,city=city,state=state,
-        dob=dob,contact=contact,policy_number=policy_number,
+        dob=dob,contact=contact,policy_number=policy_number,family_name=family_name,family_dob=family_dob,relation_type=relation_type,gender=gender,
         premium=premium,sum_assured=sum_assured,year_of_policy=year_of_policy,pay_for=pay_for,beneficiary_name=beneficiary_name,
         created_on=created_on,commission=commission,commission_date=commission_date,renew_date=renew_date,policy_type=policy_type,last_payment_date=last_payment_date,user = user)
         obj.save()
@@ -515,8 +579,6 @@ def add_record(request):
     return render(request,'dashboard/add_record.html',{'context':policy_type}) 
             
 
-
-    
     
 @login_required
 def show_record(request):
@@ -540,7 +602,16 @@ def edit_policy(request, id):
 @login_required
 def view_policy(request, id):  
     lics = Lic.objects.get(id=id) 
-    return render(request,'dashboard/view_policy.html', {'lics':lics})      
+    
+    family_name=list(lics.family_name.split(","))    
+    family_dob=list(lics.family_dob.split(","))
+    relation_type=list(lics.relation_type.split(","))
+    gender=list(lics.gender.split(","))
+    
+    family_info=zip(family_name,family_dob,relation_type,gender)
+    
+    # family_info=zip([1,2,3],[4,5,6],[7,8,9],[10,11,12])
+    return render(request,'dashboard/view_policy.html', {'lics':lics,'family':family_info})      
 
 
 
@@ -575,6 +646,19 @@ def update_policy(request, id):
         lics.last_payment_date=request.POST.get('last_payment_date','')
         lics.policy_type=PolicyType.objects.get(policy_type=request.POST.get('type',''))
         lics.status=request.POST.get('status','')
+
+        lics.family_name = request.POST.getlist(('family_name[]'))
+        lics.family_name=','.join(lics.family_name)
+
+        lics.family_dob = request.POST.getlist(('family_dob[]'))
+        lics.family_dob=','.join(lics.family_dob)
+
+        lics.relation_type = request.POST.getlist(('relation_type[]'))
+        lics.relation_type=','.join(lics.relation_type)
+
+        lics.gender = request.POST.getlist(('gender[]'))
+        lics.gender=','.join(lics.gender)
+
         lics.save()
         messages.success(request, ' Successfully Updated ')
     return redirect('/show_record')

@@ -36,15 +36,22 @@ def counter(request):
         count = lics.count()
 
 
-        commissions = Lic.objects.filter(user__pk=user.id)
-        if commissions.exists():
-            commission_list =list()
-            for commission in commissions:
-                com=commission.commission
-                commission_list.append(com)
-            total_com=sum(commission_list)
-        else:
-            total_com=0
+        # get_policy= Lic.objects.filter(created_on__year=request.POST['year'],created_on__month=request.POST['month'])
+        # print(get_policy)
+        # count = get_policy.count()
+
+        
+            
+
+        # commissions = Lic.objects.filter(user__pk=user.id)
+        # if commissions.exists():
+        #     commission_list =list()
+        #     for commission in commissions:
+        #         com=commission.commission
+        #         commission_list.append(com)
+        #     total_com=sum(commission_list)
+        # else:
+        #     total_com=0
 
                 
         
@@ -54,17 +61,17 @@ def counter(request):
         count_fund = funds.count()
         
 
-        fund_commission = Mutual_Fund.objects.filter(user__pk=user.id)
-        if fund_commission.exists():
-            commission_list = list()
-            for commission in fund_commission:
-                com =commission.commission
-                commission_list.append(com)
-            total_fund_com = sum(commission_list)
-        else:
-            total_fund_com=0
+        # fund_commission = Mutual_Fund.objects.filter(user__pk=user.id)
+        # if fund_commission.exists():
+        #     commission_list = list()
+        #     for commission in fund_commission:
+        #         com =commission.commission
+        #         commission_list.append(com)
+        #     total_fund_com = sum(commission_list)
+        # else:
+        #     total_fund_com=0
 
-        overall_commission = total_fund_com + total_com
+        # overall_commission = total_fund_com + total_com
                 
 
         return {
@@ -75,10 +82,11 @@ def counter(request):
         'count':count,
         'active':active,
         'dues':dues,
-        'total_com':total_com,
-        'total_fund_com':total_fund_com,
-        'overall_commission': overall_commission,
+        #'total_com':total_com,
+        #'total_fund_com':total_fund_com,
+        #'overall_commission': overall_commission,
         'todays_date':todays_date,
+        # 'get_policy':get_policy,
         #'data':data,
         
         }

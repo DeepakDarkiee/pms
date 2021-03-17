@@ -146,6 +146,49 @@ color: black;
             <input type="type" name="status" class="form-control" id="inputStatus" placeholder="" value="{{lics.get_status_display}}" readonly>  
           </div>
 
+          <!------ Include the above in your HEAD tag ---------->
+     <div class="col-sm-12">      
+      <h2 class="text-center">Family Details</h2>
+      </div><br><br>
+  
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <table class="table " id="tab_logic">
+          
+          <tbody>
+             {% for i,j,k,l in family %}
+            <tr id='addr0'>
+              <td>
+                {{ forloop.counter }}
+              </td>
+              <td>
+                <label for="e_group"> Name</label>
+                <input type="text" class="form-control" name="family_name[]" id="name-f" placeholder="Family Name" value="{{i}}" readonly>
+              </td>
+
+               <td>
+                <label for="e_group"> Date of Birth</label>
+                <input type="text" class="form-control" name="family_dob[]" id="name-f" placeholder="Family Dob" value="{{j}}" readonly>
+              </td>
+
+              <td>
+                <label for="type_of_policy">Relation Type</label>
+                <input type="text" class="form-control" name="family_dob[]" id="name-f" placeholder="Relation Type" value="{{k}}" readonly>
+              </td>
+
+              <td>
+                <label for="type_of_policy">Gender</label> 
+                <input type="text" class="form-control" name="gender[]" id="name-f" placeholder="Gender" value="{{l}}" readonly>
+              </td>
+
+            </tr>
+            <tr id='addr1'></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
           
           <div class="col-sm-12 form-group mb-0">
            <a class="btn btn-sm btn-primary"  style="color:white; margin-left:90%"  href="{% url 'show_record' %}"><span class="glyphicon glyphicon-pencil" >Back</span></a>
@@ -161,6 +204,7 @@ color: black;
 {% include "dashboard/footer.html" %}
 
 </div>
+
 
 {% endblock content %}
 

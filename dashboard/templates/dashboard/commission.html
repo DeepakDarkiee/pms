@@ -13,7 +13,17 @@
     crossorigin="anonymous">
 </script>
 
+<!-- <script type="text/javascript">
+$(document).ready(function() {
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
 
+    $("#month").val(month); 
+    $("#year").val(year);    
+    
+});  
+</script> -->
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
@@ -106,6 +116,7 @@
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <!-- seet alert -->
 <script src="sweetalert2.all.min.js"></script>
 <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
@@ -322,7 +333,7 @@
             </div>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
           <div class="dropdown">
 
           <a class="nav-link " data-toggle="dropdown" href="#">
@@ -348,9 +359,9 @@
 
           </div>
           </div>
-          </li>
+          </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
           <div class="dropdown">
           <a class="nav-link " data-toggle="dropdown" href="#">
            <i class="fa fa-industry text-blue" ></i>Govt Scheme &ensp;  <i class="fas fa-caret-down"></i></a>   
@@ -363,14 +374,27 @@
             
             </div>
             </div>
+          </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'insurance'  %}">
+              <i class="ni ni-collection text-orange"></i>Insurance
+            </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'govt-scheme'  %}">
+              <i class="fa fa-industry text-blue"></i>Govt Scheme
+            </a>
+          </li>
           
           <li class="nav-item">
-            <a class="nav-link " href="#">
+            <a class="nav-link " href="{% url 'premium-calculator'  %}">
               <i class="fa fa-calculator text-red"></i>Premium Calculator
             </a>
           </li>
+
+          
 
           
         
@@ -425,23 +449,50 @@
 </div>
 </nav>
 
+
 <div class="main-content">
 
   <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
+      
+      <form method="POST" class="post-form" action="/commission/">  
+        {% csrf_token %}
+            
+           
+            <select id="year" name="year" onchange="this.form.submit()">
+            <option value=2015>2015</option>
+            <option value=2016>2016</option>
+            <option value=2017>2017</option>
+            <option value=2018>2018</option>
+            <option value=2019>2019</option>
+            <option value=2020>2020</option>
+            <option value=2021>2021</option>
+        </select>
 
-      <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="/index">MY ACCOUNT</a>
+          
+        <select id="DDL" disabled="disabled">
+            <option value="" selected Disabled="">month</option>     
+            <option value=1>January</option>
+            <option value=2>February</option>
+            <option value=3>March</option>
+            <option value=4>April</option>
+            <option value=5>May</option>
+            <option value=6>June</option>
+            <option value=7>July</option>
+            <option value=8>August</option>
+            <option value=9>September</option>
+            <option value=1>October</option>
+            <option value=11>November</option>
+            <option value=12>December</option>
+        </select>
 
-      <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" method="get" action="#">
-        <div class="form-group mb-0">
-          <div class="input-group input-group-alternative">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-search"></i></span>
-            </div>
-            <input class="form-control" name="q" placeholder="Search " type="text" >
-          </div>
-        </div>
       </form>
+    
+      <hr/>
+      <input type="checkbox" name="chddkl" onclick="Enableddl(this)"/>
+      <h4 style="color: white">Accept The Checkbox, To Enable  The Dropdown (Select option)</h4>
+      <hr/>
+       
 
       <ul class="navbar-nav align-items-center d-none d-md-flex">
         <li class="nav-item dropdown">
@@ -642,7 +693,7 @@
                       <td>{{count}}</td>
                       <td>NA</td>
                       <td style="color: green">{{total_com}}</td>
-
+                  
                   </tr>
                   
                   <tr>

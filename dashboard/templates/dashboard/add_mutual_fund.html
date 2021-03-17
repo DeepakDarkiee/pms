@@ -1,7 +1,7 @@
 {% extends 'dashboard/base_mutual.html' %}
 
 {% block content %}
-
+  
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col">
@@ -38,20 +38,27 @@
           
           <div class="col-sm-4 form-group">
             <label for="e_group">Contact No.</label><span class="required">*</span>
-            <input type="text" class="form-control" name="contact_no" id="name-f" placeholder="Contact Number" required>
+            <input type="text" class="form-control" name="contact_no" id="name-f" placeholder="Contact Number" 
+            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              type = "number"
+              maxlength = "12" required>
           </div>
+
           <div class="col-sm-4 form-group">
             <label for="cost_center">Address Line 1</label><span class="required">*</span>
             <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" required>
           </div>
+
           <div class="col-sm-4 form-group">
             <label for="cost_center">Address Line 2</label>
             <input type="text" class="form-control" name="address_line_two" id="cost_center" placeholder="Address Line 2" >
           </div>
+
           <div class="col-sm-4 form-group">
         <label for="bname">Landmark</label>
         <input type="text" class="form-control" name="lendmark" id="name-l" placeholder="Landmark">
       </div>
+
           <div class="col-sm-4 form-group">
         <label for="bname">City</label><span class="required">*</span>
         <input type="text" class="form-control" name="city" id="name-l" placeholder="City" required>
@@ -112,7 +119,7 @@
     <option value="--select--">--select--</option>
     <option value="APOLLO MUNICH GIC LTD">APOLLO MUNICH GIC LTD</option>
     <option value="Bajaj">Bajaj</option>
-    <option value="BAJAJ ALLINZ GIC LTD">BAJAJ ALLINZ GIC LTD</option>
+    <option value="BAJAJ ALLINZ GIC LT/D">BAJAJ ALLINZ GIC LTD</option>
     <option value="BHARTI AXA GIC LTD">BHARTI AXA GIC LTD</option>    
     <option value="FUTURE GENERALLY GIC LTD">FUTURE GENERALLY GIC LTD</option>
     <option value="GO-DIGIT GIC LTD">GO-DIGIT GIC LTD</option>
@@ -175,7 +182,7 @@
 
     <div class="col-sm-4 form-group">
      <label for="cost_center">Account_No</label>
-      <input type="text" class="form-control" name="account_no" id="cost_center" placeholder="Account_No" >
+      <input type="number" class="form-control" name="account_no" id="cost_center" placeholder="Account_No" >
     </div>  
 
 

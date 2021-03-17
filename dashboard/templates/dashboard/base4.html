@@ -122,6 +122,7 @@
   <!-- CSS Files -->
   <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link rel="stylesheet" href="/static/css/msg1.css" />
+  <link rel="stylesheet" href="/static/css/number.css"/>
 
 </head>
 {% if messages %}
@@ -314,7 +315,7 @@
 
           
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
           <div class="dropdown">
 
           <a class="nav-link " data-toggle="dropdown" href="#">
@@ -340,12 +341,12 @@
 
           </div>
           </div>
-          </li>
+          </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
           <div class="dropdown">
           <a class="nav-link " data-toggle="dropdown" href="#">
-           <i class="fa fa-industry text-info" ></i>Govt-Scheme &ensp;  <i class="fas fa-caret-down"></i></a>   
+           <i class="fa fa-industry text-blue" ></i>Govt Scheme &ensp;  <i class="fas fa-caret-down"></i></a>   
                 
           <div class="dropdown-menu">
             
@@ -355,37 +356,27 @@
             
             </div>
             </div>
+          </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'insurance'  %}">
+              <i class="ni ni-collection text-orange"></i>Insurance
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'govt-scheme'  %}">
+              <i class="fa fa-industry text-blue"></i>Govt Scheme
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'premium-calculator'  %}">
+              <i class="fa fa-calculator text-red"></i>Premium Calculator
+            </a>
           </li>
 
           
-          <li class="nav-item">
-            <a class="nav-link " href="#">
-              <i class="fa fa-tasks text-red"></i>Premium-Calculator
-            </a>
-          </li>
-
-          <!-- <li class="nav-item">
-            <a class="nav-link " href="#">
-              <i class="ni ni-book-bookmark text-yellow"></i>Add Plan
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link " href="#">
-              <i class="fa fa-bars text-red" aria-hidden="true" ></i>Manage Plan
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link " href="#">
-              <i class="fa fa-industry text-info" aria-hidden="true"></i>Add Company 
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#">
-              <i class="ni ni-books text-purple"></i>Manage Company
-            </a>
-          </li> -->
           
         
           <li class="nav-item">

@@ -11,6 +11,30 @@ color: black;
 {% block header %}
 {% endblock header %}
 
+<script>
+      $(document).ready(function() {
+        var i = 1;
+        $("#add_row").click(function() {
+          $('#addr' + i).html("<td>" + (i + 1) + "</td><td><input name=' family_name[]' type='text' placeholder=' Family Name' class='form-control input-md'/> </td><td><input  name='family_dob[]' type='date' placeholder=' Family Dob' class='form-control input-md'/> </td><td><select class='form-control' name='relation_type[]'><option value='' selected>Select</option><option value='Father'>Father</option><option value='Mother'>Mother</option><option value='Wife'>Wife</option><option value='Children'>Children</option></select></td>....<td><select class='form-control' name='gender[]'><option value='' selected>Select</option><option value='Male'>Male</option><option value='Female'>Female</option></select></td>");
+          $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+          i++;
+        });
+        $("#delete_row").click(function() {
+          if (i > 1) {
+            $("#addr" + (i - 1)).html('');
+            i--;
+          }
+        });
+      });
+      $('#yearPicker').datetimepicker({
+        format: "YYYY",
+        viewMode: "years",
+      });
+    </script>
+
+
+
+
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col">
@@ -52,8 +76,11 @@ color: black;
 
               <div class="col-sm-4 form-group">
                 <label for="e_group">Contact No.</label><span class="required">*</span>
-                <input type="number" class="form-control" name="contact" id="name-f" placeholder="Contact Number" value="{{lics.contact}}" required>
-              </div>
+                <input type="number" class="form-control" name="contact" id="name-f" placeholder="Contact Number" value="{{lics.contact}}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                type = "number"
+                maxlength = "12"required>
+                </div>
+              
               <div class="col-sm-6 form-group">
                 <label for="cost_center">Address Line 1</label><span class="required">*</span>
                 <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" value="{{lics.address_line_one}}" required>
@@ -192,6 +219,72 @@ color: black;
              {% endif %}
             </select>
         </div>
+
+
+         <!------ Include the above in your HEAD tag ---------->
+     <div class="col-sm-12">      
+      <h2 class="text-center">Family Details</h2>
+      </div><br><br>
+  
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <table class="table " id="tab_logic">
+          
+          <tbody>
+            <tr id='addr0'>
+              <td>
+                1
+              </td>
+              <td>
+                <label for="e_group"> Name</label>
+                <input type="text" class="form-control" name="family_name[]" id="name-f" placeholder="Family Name" >
+              </td>
+
+               <td>
+                <label for="e_group"> Date of Birth</label>
+                <input type="date" class="form-control" name="family_dob[]" id="name-f" placeholder="Family Dob" >
+              </td>
+
+              <td>
+                <label for="type_of_policy">Relation Type</label>
+                <select class="form-control" name="relation_type[]">
+                  <option disabled="true" selected="selected">-----Select ---- </option>
+                  <option value="Father">Father</option>
+                  <option value="Mother">Mother</option>
+                  <option value="Wife">Wife</option>
+                  <option value="Children">Children</option>
+                </select>
+              </td>
+
+
+              <td>
+                <label for="type_of_policy">Gender</label>
+                <select class="form-control" name="gender[]">
+                <option disabled="true" selected="selected">-----Select ----</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                </select>
+              </td>
+
+            </tr>
+            <tr id='addr1'></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div class="col-sm-12 form-group mb-0" style="margin-top: 10px;">
+       
+       <a id='delete_row' style="margin:2px; background-color: #b80000" class="btn btn-sm btn-primary float-right"><span style="color: white"><i class="fas fa-trash-alt"></i></span></a>
+       
+       <a id="add_row" style="margin:2px; " class="btn btn-sm btn-primary float-right"><span style="color: white"><i class="fas fa-plus"></span></i></a>
+    
+    </div>
+     
+
+
           <div class="col-sm-12">
             <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
             </label>

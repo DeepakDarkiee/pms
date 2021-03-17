@@ -60,8 +60,12 @@ urlpatterns = [
 ##########################################################################################################
 
     path('commission/', views.commission, name='commission'),
+    path('insurance/', views.insurance, name='insurance'),
+    path('govt-scheme/', views.govt_scheme, name='govt-scheme'),
+    path('premium-calculator/', views.premium_calculator, name='premium-calculator'),
     path('performance/', views.performance, name='performance'),
     path('add-policy/', views.add_policy, name='add-policy'),
+    
 
 
 #################################################################################################################

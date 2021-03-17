@@ -43,8 +43,12 @@ color: black;
           
           <div class="col-sm-4 form-group">
             <label for="e_group">Contact No.</label><span class="required">*</span>
-            <input type="text" class="form-control" name="contact_no" id="name-f" placeholder="Contact Number" value="{{funds.contact_no}}" required>
+            <input type="number" class="form-control" name="contact_no" id="name-f" placeholder="Contact Number" value="{{funds.contact_no}}" 
+             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              type = "number"
+              maxlength = "12" required>
           </div>
+
           <div class="col-sm-4 form-group">
             <label for="cost_center">Address Line 1</label><span class="required">*</span>
             <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Address Line 1" value="{{funds.address_line_one}}" required>
@@ -147,7 +151,7 @@ color: black;
 
     <div class="col-sm-4 form-group">
      <label for="cost_center">Account_No</label>
-      <input type="text" class="form-control" name="account_no" id="cost_center" placeholder="Account_No" value="{{funds.account_no}}" required>
+      <input type="number" class="form-control" name="account_no" id="cost_center" placeholder="Account_No" value="{{funds.account_no}}" required>
     </div>  
 
 

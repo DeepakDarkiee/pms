@@ -17,6 +17,13 @@ RelationType=(
 )
 
 
+position=(
+
+    ('Beginner','Beginner'),
+    ('Intermediate','Intermediate'),
+    ('Expert','Expert'),
+)
+
 ###################################################################################################################################################################
 
 gender=(
@@ -186,17 +193,17 @@ class Lic(models.Model):
     year_of_policy=models.IntegerField()
     pay_for=models.CharField(choices=PAY_FOR,null=False,max_length=50)
     beneficiary_name=models.CharField(max_length=50)
-    created_on=models.DateTimeField(max_length=50)
+    created_on=models.CharField(max_length=50)
     last_payment_date=models.CharField(max_length=50)
     renew_date=models.CharField(max_length=20)
     status=models.IntegerField(choices=STATUS,default=1)
     commission=models.IntegerField()
     commission_date=models.CharField(max_length=50)
 
-    family_name = models.CharField(max_length=100,default=None)
-    family_dob = models.CharField(max_length=100,blank=True,null=True)
-    relation_type = models.CharField(max_length=100,choices=RelationType,null=True)
-    gender = models.CharField(max_length=100, choices=gender,null=True)
+    # family_name = models.CharField(max_length=100,default=True,blank=True,null=True)
+    # family_dob = models.CharField(max_length=100,blank=True,null=True)
+    # relation_type = models.CharField(max_length=100,choices=RelationType,null=True)
+    # gender = models.CharField(max_length=100, choices=gender,null=True)
     
 
     user=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -293,10 +300,10 @@ class Mutual_Fund(models.Model):
     commission_date=models.CharField(max_length=50)
     status=models.IntegerField(choices=STATUS,default=1)
 
-    family_name = models.CharField(max_length=100,blank=True,null=True)
-    family_dob = models.CharField(max_length=100,blank=True,null=True)
-    relation_type = models.CharField(max_length=100,blank=True,null=True)
-    gender = models.CharField(max_length=100, choices=gender,null=True)
+    # family_name = models.CharField(max_length=100,blank=True,null=True)
+    # family_dob = models.CharField(max_length=100,blank=True,null=True)
+    # relation_type = models.CharField(max_length=100,blank=True,null=True)
+    # gender = models.CharField(max_length=100, choices=gender,null=True)
     
     user=models.ForeignKey(User,on_delete=models.CASCADE)
 

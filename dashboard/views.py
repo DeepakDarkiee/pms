@@ -150,16 +150,16 @@ def add_mutual_fund(request):
         commission=request.POST.get('commission')
         commission_date=request.POST.get('commission_date')
 
-        family_name = request.POST.get('family_name')
-        family_dob = request.POST.get('family_dob')
-        relation_type = request.POST.get('relation_type')
-        gender = request.POST.get('gender') 
+        # family_name = request.POST.get('family_name')
+        # family_dob = request.POST.get('family_dob')
+        # relation_type = request.POST.get('relation_type')
+        # gender = request.POST.get('gender') 
 
         obj=Mutual_Fund(first_name=first_name,last_name=last_name,dob=dob,email=email,contact_no=contact_no,
             address_line_one=address_line_one,pay_for=pay_for,created_on=created_on,address_line_two=address_line_two,lendmark=lendmark,city=city,
             state=state,statement_date=statement_date,premium=premium,folio_no=folio_no,company_name=company_name,name_holder=name_holder,
             tax_status=tax_status,commission=commission,commission_date=commission_date,renew_date=renew_date,account_no=account_no,ifsc_code=ifsc_code,mode_of_holding=mode_of_holding,bank_name=bank_name,
-            family_name=family_name,family_dob=family_dob,relation_type=relation_type,gender=gender,user=user)
+            user=user)
         obj.save()
 
         messages.success(request,'successfully Save')
@@ -549,26 +549,26 @@ def add_record(request):
         renew_date=request.POST.get('renew_date')
         commission=request.POST.get('commission')
         commission_date=request.POST.get('commission_date')
-
-
-        family_name = request.POST.getlist(('family_names[]'))
-        print(family_name)
-        family_name=','.join(family_name)
-
-        family_dob = request.POST.getlist(('family_dob[]'))
-        family_dob=','.join(family_dob)
-
-        relation_type = request.POST.getlist(('relation_type[]'))
-        relation_type=','.join(relation_type)
-
-        gender = request.POST.getlist(('gender[]'))
-        gender=','.join(gender)
-
         policy_type=PolicyType.objects.get(policy_type=request.POST.get('type'))
         last_payment_date=request.POST.get('last_payment_date')
+
+
+        # family_name = request.POST.getlist(('family_names[]'))
+        # print(family_name)
+        # family_name=','.join(family_name)
+
+        # family_dob = request.POST.getlist(('family_dob[]'))
+        # family_dob=','.join(family_dob)
+
+        # relation_type = request.POST.getlist(('relation_type[]'))
+        # relation_type=','.join(relation_type)
+
+        # gender = request.POST.getlist(('gender[]'))
+        # gender=','.join(gender)
+
         
         obj=Lic(email=email,first_name=first_name,last_name=last_name,middle_name=middle_name, address_line_one=address_line_one,address_line_two=address_line_two,lendmark=lendmark,city=city,state=state,
-        dob=dob,contact=contact,policy_number=policy_number,family_name=family_name,family_dob=family_dob,relation_type=relation_type,gender=gender,
+        dob=dob,contact=contact,policy_number=policy_number,
         premium=premium,sum_assured=sum_assured,year_of_policy=year_of_policy,pay_for=pay_for,beneficiary_name=beneficiary_name,
         created_on=created_on,commission=commission,commission_date=commission_date,renew_date=renew_date,policy_type=policy_type,last_payment_date=last_payment_date,user = user)
         obj.save()
@@ -603,15 +603,15 @@ def edit_policy(request, id):
 def view_policy(request, id):  
     lics = Lic.objects.get(id=id) 
     
-    family_name=list(lics.family_name.split(","))    
-    family_dob=list(lics.family_dob.split(","))
-    relation_type=list(lics.relation_type.split(","))
-    gender=list(lics.gender.split(","))
+    # skill=list(lics.skill.split(","))    
+    # position=list(lics.position.split(","))
+    # experience=list(lics.experience.split(","))
     
-    family_info=zip(family_name,family_dob,relation_type,gender)
+    
+    # family_info=zip(skill,position,experience)
     
     # family_info=zip([1,2,3],[4,5,6],[7,8,9],[10,11,12])
-    return render(request,'dashboard/view_policy.html', {'lics':lics,'family':family_info})      
+    return render(request,'dashboard/view_policy.html',{'lics':lics})      
 
 
 
@@ -647,17 +647,17 @@ def update_policy(request, id):
         lics.policy_type=PolicyType.objects.get(policy_type=request.POST.get('type',''))
         lics.status=request.POST.get('status','')
 
-        lics.family_name = request.POST.getlist(('family_name[]'))
-        lics.family_name=','.join(lics.family_name)
+        # lics.family_name = request.POST.getlist(('family_name[]'))
+        # lics.family_name=','.join(lics.family_name)
 
-        lics.family_dob = request.POST.getlist(('family_dob[]'))
-        lics.family_dob=','.join(lics.family_dob)
+        # lics.family_dob = request.POST.getlist(('family_dob[]'))
+        # lics.family_dob=','.join(lics.family_dob)
 
-        lics.relation_type = request.POST.getlist(('relation_type[]'))
-        lics.relation_type=','.join(lics.relation_type)
+        # lics.relation_type = request.POST.getlist(('relation_type[]'))
+        # lics.relation_type=','.join(lics.relation_type)
 
-        lics.gender = request.POST.getlist(('gender[]'))
-        lics.gender=','.join(lics.gender)
+        # lics.gender = request.POST.getlist(('gender[]'))
+        # lics.gender=','.join(lics.gender)
 
         lics.save()
         messages.success(request, ' Successfully Updated ')
